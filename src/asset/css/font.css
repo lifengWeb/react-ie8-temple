@@ -1,0 +1,60 @@
+/*字体_字体大小_加粗_颜色*/
+/*灰色 med*/
+
+.med_six_five_grey{
+    font-size:0.6rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(134,138,144,1);
+}
+.med_sixHalf_five_grey{
+    font-size:0.65rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(134,138,144,1);
+}
+.med_seven_five_grey{
+    font-size:0.7rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(134,138,144,1);
+}
+.med_eight_five_grey{
+    font-size:0.8rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(134,138,144,1);
+}
+/*灰色 regu*/
+.regu_seven_four_grey{
+    font-size:0.7rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(134,138,144,1);
+}
+.regu_six_four_grey{
+    font-size:0.6rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(134,138,144,1);
+}
+/*黑色*/
+.taho_fifteen_bold_black{
+    font-size:1.52rem;
+    font-family:Tahoma-Bold;
+    font-weight:bold;
+    color:rgba(47,49,54,1);
+}
+.med_seven_five_Black{
+    font-size:0.7rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(25,29,33,1);
+}
+/*白色*/
+.med_seven_five_white{
+    font-size:0.7rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+}

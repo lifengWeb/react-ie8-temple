@@ -1,0 +1,104 @@
+html{
+	font-size:62.5%;
+}
+@media only screen and (min-width: 1024px) { 
+	html{
+        /* font-size: calc(66.6875% + 9.33 * (100vw - 1024px) / 896);//10.67px */
+        font-size: 10px;
+	}
+}
+@media only screen and (min-width: 1280px) { 
+	html{
+        /* font-size: calc(83.3125% + 6.67 * (100vw - 1280px) / 640);//13.33px */
+        font-size: 13px;
+	}
+}
+@media only screen and (min-width: 1366px) { 
+	html{
+        /* font-size: calc(88.875% + 5.78 * (100vw - 1366px) / 554);//14.22px */
+        font-size: 14px;
+	}
+}
+@media only screen and (min-width: 1440px) { 
+	html{
+        /* font-size: calc(93.75% + 5 * (100vw - 1440px) / 480);//15px */
+        font-size: 15px;
+	}
+}
+@media only screen and (min-width: 1680px) { 
+    /* //1680  1919 1920  3840 */
+	html{
+        /* font-size: calc(109.375% + 2.5 * (100vw - 1680px) / 240); //17.5px  */
+        font-size: 17px;
+	}
+}
+@media only screen and (min-width: 1920px) { 
+	html{
+        /* font-size: 125%;//20px */
+        font-size: 20px;
+	}
+}
+body{
+	font-size:1rem;
+	line-height:1;
+}
+
+html,body,#root{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	color: rgb(0,0,0);
+	box-sizing: border-box;
+}
+
+div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    vertical-align: baseline;
+    font-family: "tahoma","Microsoft YaHei","PingFang-SC", Arial, Helvetica, sans-serif;
+}
+ul,ol,li{
+	list-style: none;
+}
+input, textarea {
+    outline: none;
+    border: none;
+}
+img {
+    border: none;
+    vertical-align: middle;
+}
+.floatRight{
+    float: right;
+}
+.floatLeft{
+    float: Left;
+}
+.clearfix::after{
+    content: ".";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+.clearfix{
+    zoom: 1;
+}
+#app{
+    height: 100%;
+}
+.nav{
+    width: 80rem;
+    height: 2rem;
+    background: #fff;
+    font-size:0.7rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(134,138,144,1);
+    padding-left:2rem;
+    line-height: 2rem;
+}

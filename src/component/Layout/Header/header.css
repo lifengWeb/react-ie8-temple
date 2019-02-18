@@ -1,0 +1,109 @@
+.header {
+    width: 100%;
+    height: 3rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0rem 0rem 1rem 0rem rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 3rem 0.6rem 3rem;
+}
+
+.logoImg {
+    width: 10.05rem;
+    height: 1.7rem;
+}
+
+.headerRight {
+    float: right;
+}
+
+.headerRightItem {
+    width: 7.1rem;
+    height: 1.55rem;
+    line-height: 1.55rem;
+    border-left: 1px solid rgb(228, 231, 232);
+    padding-left: 1rem;
+    box-sizing: border-box;
+    /*字体样式*/
+    font-size: 0.7rem;
+    font-family: PingFang-SC-Regular;
+    font-weight: 400;
+    color: rgba(134, 138, 144, 1);
+}
+
+.headerImgItem {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(80, 80, 80, 1);
+    margin-right: 1rem;
+}
+
+.headeImg {
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    margin-right: 0.3rem;
+}
+
+.msgIcon {
+    width: 0.55rem;
+    height: 0.6rem;
+}
+
+.updateInfoIcon {
+    width: 0.65rem;
+    height: 0.65rem;
+}
+
+.loginOutIcon {
+    width: 0.6rem;
+    height: 0.65rem;
+}
+
+.headeImg,
+.msgIcon,
+.updateInfoIcon,
+.loginOutIcon {
+    margin-right: 0.3rem;
+}
+
+.newtips {
+    width: 1.45rem;
+    height: 0.6rem;
+    background: rgba(246, 78, 61, 1);
+    border-radius: 4px;
+    font-size: 0.57rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    margin-left: 0.3rem;
+}
+.connectTips{
+    width:22.7rem;
+    height:7.35rem;
+    background:rgba(255,255,255,1);
+    box-shadow:0rem 0rem 1rem 0rem rgba(0, 0, 0, 0.15);
+    border-radius:0rem;
+    position: absolute;
+    top:1rem;
+    right:1rem;
+    padding: 1rem 0.5rem 0.5rem 1rem;
+}
+.tipsTitle{
+    margin-bottom: 0.5rem;
+    width: 21.5rem;
+    box-sizing: border-box;
+}
+.closeIcon{
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-right: 0.5rem;
+}
+.goDetailBtn{
+    width:4rem;
+    height:1.3rem;
+    background:rgba(2,149,210,1);
+    border-radius:4px;
+    line-height: 1.3rem;
+    position: absolute;
+    bottom: 0.5rem;
+    right:0.5rem;
+    text-align: center;
+}

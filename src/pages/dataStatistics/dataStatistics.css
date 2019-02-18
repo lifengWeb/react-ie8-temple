@@ -1,0 +1,142 @@
+.dataContain{
+    width: 80rem;
+    height:6rem;
+    margin: 1rem 0 1rem 0;
+    box-sizing: border-box;
+}
+.peopleCount{
+    width:20rem;
+    height:6rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    border-radius:0rem;
+    float: left;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.marginBtm{
+    margin-bottom: 1rem;
+}
+.abnormalData{
+    width:59.3rem;
+    height:6.02rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    border-radius:0rem;
+    float: right;
+}
+.abnormalDataItem{
+    width:19.7rem;
+    height:4.7rem;
+    border-right: 1px solid rgb(228, 231, 232);
+    float: left;
+    padding: 0.3rem 2rem 2rem 2rem;
+    margin-top: 0.6rem;
+    box-sizing: border-box;
+}
+.abnormalDataItem:nth-of-type(3){/*从1开始*/
+    border-right: none
+}
+
+.dateChoose{
+    width: 80rem;
+    height: 6rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    border-radius:0rem;
+    padding:1rem 0 0 2rem;
+}
+.chooseDayItem{
+    height: 1.6rem;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+.dayRadio{
+    margin: 0 1rem 0 1rem;
+}
+
+.chartContain{
+    width: 80rem;
+    margin-top: 1rem;
+}
+.chartContainOne{
+    height: 16.65rem;
+    margin-bottom: 0.5rem;
+}
+.chartOne{
+    width:36.75rem;
+    height:16.65rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    border-radius:0rem;
+    margin-right: 0.5rem;
+    box-sizing: border-box;
+}
+.chartTwo{
+    width:42.75rem;
+    height:16.65rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    border-radius:0rem;
+    box-sizing: border-box;
+}
+.chartContainTwo{
+    height: 15.15rem;
+    margin-bottom: 0.5rem;
+}
+.chartThree{
+    width:42.3rem;
+    height:15.15rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    border-radius:0rem;
+    margin-right: 0.5rem;
+}
+.chartFour{
+    width:37.2rem;
+    height:15.15rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    border-radius:0rem;
+}
+
+.personList{
+    width:80rem;
+    height:19.6rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    box-shadow:0rem 0rem 0rem 0rem rgba(0, 0, 0, 0.1);
+    border-radius:0rem;
+    margin-bottom: 2rem;
+}
+.personListTitle{
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 2rem;
+}
+
+
+/*antd重写样式*/
+.dateChoose .ant-radio-button-wrapper{
+    /* background:rgba(241,242,244,1); */
+    width:3.35rem;
+    height:1.6rem;
+    background:#DEE1E2;
+    box-shadow:0rem 0rem 0rem 0rem rgba(0, 0, 0, 0.1);
+    border-radius:0rem;
+    
+    font-size:0.6rem;
+    line-height: 1.6rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    padding: 0;
+    text-align: center;
+    color: black;
+}
+
+.dateChoose .ant-radio-button-wrapper-checked{
+    background:rgba(3,211,216,1);
+    color: #fff;
+}
