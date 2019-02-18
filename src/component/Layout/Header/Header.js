@@ -9,6 +9,12 @@ import loginoutIcon from '../../../asset/img/logout.png';
 
 
 class Header extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            msgShow:true
+        }
+    }
     
     render() {
         return (
@@ -32,10 +38,14 @@ class Header extends Component {
                         <span>退出登录</span>
                     </div>
                 </div>
-                <div className='connectTips'>
+                {
+                    this.state.msgShow?
+                    <div className='connectTips'>
                     <div className='tipsTitle clearfix'>
                         <span className='med_seven_five_Black floatLeft'>扫描到手环</span>
-                        <img src={require('../../../asset/img/closeIcon.png')} className='closeIcon floatRight'></img>
+                        <img src={require('../../../asset/img/closeIcon.png')} className='closeIcon floatRight' onClick={()=>{
+                            this.setState({msgShow:false})
+                        }}></img>
                     </div>
                     <span className='med_sixHalf_five_grey'>
                         手环属于 王先生(手环ID156642626) 是否立即查看患者详情
@@ -44,7 +54,9 @@ class Header extends Component {
                         查看详情
                     </div>
 
-                </div>
+                </div>:''
+                }
+              
             </div>
         )
     }

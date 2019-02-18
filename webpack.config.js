@@ -11,7 +11,7 @@ module.exports = {
         loaders: ["babel-loader"],
       },
       { test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
-      { test: /\.css$/, loader: "style-loader!css-loader"},
+      { test: /\.css$/, loader: "style-loader!css-loader",options:{modules: true,}},
       {test: /\.(png|jpg)$/,loader: 'url-loader'}
     ],
     postLoaders:[//ie8缺少标识符defualt

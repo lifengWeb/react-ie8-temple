@@ -70,6 +70,7 @@ img {
     border: none;
     vertical-align: middle;
 }
+/*浮动*/
 .floatRight{
     float: right;
 }
@@ -91,6 +92,7 @@ img {
 #app{
     height: 100%;
 }
+/*页面顶部面包屑*/
 .nav{
     width: 80rem;
     height: 2rem;
@@ -101,4 +103,42 @@ img {
     color:rgba(134,138,144,1);
     padding-left:2rem;
     line-height: 2rem;
+}
+.borderBottom{
+    border-bottom: 1px solid #F0F1F2
+}
+/*弹窗遮罩层*/
+.coverView{
+    width: 100vw;
+    height: 100vh;
+    background:rgba(0,0,0,0.45);
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 999;
+}
+
+/*antd重写样式*/
+/*选择区域radio重写样式*/
+.dateChoose .ant-radio-button-wrapper{
+    /* background:rgba(241,242,244,1); */
+    width:3.35rem;
+    height:1.6rem;
+    background:#DEE1E2;
+    box-shadow:0rem 0rem 0rem 0rem rgba(0, 0, 0, 0.1);
+    border-radius:2px;
+    
+    font-size:0.6rem;
+    line-height: 1.6rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    padding: 0;
+    text-align: center;
+    color: black;
+}
+
+.dateChoose .ant-radio-button-wrapper-checked{
+    background:rgba(3,211,216,1);
+    color: #fff;
 }
