@@ -37,6 +37,12 @@
     font-weight:400;
     color:rgba(134,138,144,1);
 }
+.regu_sixHalf_four_grey{
+    font-size:0.65rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(134,138,144,1);
+}
 .bold_elev_bold_grey{
     font-size:1.1rem;
     font-family:PingFang-SC-Bold;
@@ -61,6 +67,18 @@
     font-family:PingFang-SC-Medium;
     font-weight:500;
     color:rgba(44,62,80,1);
+}
+.med_six_five_Black{
+    font-size:0.6rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(47,49,54,1);
+}
+.reg_ten_four_Black{
+    font-size:1rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(47,49,54,1);
 }
 /*白色*/
 .med_seven_five_white{

@@ -12,7 +12,7 @@ class Header extends Component {
     constructor(props){
         super(props);
         this.state={
-            msgShow:true
+            msgShow:false
         }
     }
     

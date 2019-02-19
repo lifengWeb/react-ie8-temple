@@ -1,8 +1,13 @@
 module.exports = {
   entry: ["babel-polyfill", './entry.js'],
-  output: 'bundle.js',
+  output: {filename:'bundle.js',path:'/'},
   debug: true,
   devtool: 'source-map',
+  devServer: {
+      historyApiFallback:{
+          index:'./index.html'
+      },
+  },
   module: {
     loaders: [
       {

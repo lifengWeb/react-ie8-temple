@@ -46,6 +46,7 @@
     border:0.05px solid rgba(222, 225, 226, 1);
     border-radius:2px;
     padding:1rem 0 0 2rem;
+    box-sizing: border-box;
 }
 .chooseDayItem{
     height: 1.6rem;

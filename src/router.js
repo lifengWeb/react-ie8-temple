@@ -11,7 +11,11 @@ const Sider = require('./component/Layout/Menu/Menu');
 const DataStatistics = require('./pages/dataStatistics/DataStatistics');
 const DiseaseManager = require('./pages/diseaseManager/DiseaseManager');
 const FollowUpManager = require('./pages/followUpManager/FollowUpManager');
+
 const PatientManager = require('./pages/patientManager/PatientManager');
+const AddPatient = require('./pages/patientManager/AddPatient');
+
+
 const ReminderManager = require('./pages/reminderManager/ReminderManager');
 const AdminManager = require('./pages/adminManager/AdminManager');
 const CommunityManager = require('./pages/communityManager/CommunityManager');
@@ -23,7 +27,6 @@ const style={
     height:'100%',
     padding:'1rem 2rem 2rem 0',
     overflow:'scroll',
-    // overflowX: 'hidden'
   }
 }
 const App = React.createClass({
@@ -46,13 +49,16 @@ const App = React.createClass({
 
 //不能用React.render
 ReactDOM.render((
-  <Router history={hashHistory} routes={
+  <Router history={browserHistory} routes={
     <Route path="/" component={App}>
       <IndexRoute component={DataStatistics}/>
       <Route path='dataStatistics' component={DataStatistics}/>
       <Route path='diseaseManager' component={DiseaseManager}/>
       <Route path='followUpManager' component={FollowUpManager}/>
+      {/* 患者管理 */}
       <Route path='patientManager' component={PatientManager}/>
+      <Route path='patientManager/addPatient' component={AddPatient}/>
+
       <Route path='reminderManager' component={ReminderManager}/>
       <Route path='adminManager' component={AdminManager}/>
       <Route path='communityManager' component={CommunityManager}/>

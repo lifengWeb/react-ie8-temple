@@ -1,5 +1,7 @@
 //病人管理
 import React ,{Component} from 'react';
+// import {  Link } from 'react-router';
+import { browserHistory } from 'react-router';
 require('./patientManager.css');
 
 const Breadcrumb = require('antd/lib/breadcrumb');
@@ -77,16 +79,10 @@ class PatientManager extends Component{
                 return(
                     <div style={{position:'relative'}}
                             onMouseLeave={(e)=>{
-                                console.log(e);
-                                this.setState(
-                                    {showItem:-1}
-                                )
+                                this.setState({showItem:-1})
                             }}
                             onMouseOver={(e)=>{
-                                console.log(e);
-                                this.setState(
-                                    {showItem:record.key}
-                                )
+                                this.setState({showItem:record.key})
                             }}>
                             <span
                                 style={showItem==record.key?{color:'#03D3D8'}:{}}
@@ -130,7 +126,6 @@ class PatientManager extends Component{
                 <span>
                   <a href="#">详情</a>
                   <a href="#">编辑</a>
-                  {/* <span className="ant-divider"></span> */}
                   <a href="#">删除</a>
                   {/* <span className="ant-divider"></span> */}
                 </span>
@@ -182,7 +177,6 @@ class PatientManager extends Component{
                             </Select>
                         </div>
                         <div className='floatLeft'>
-                            {/* <RangePicker format="yyyy/MM/dds" onChange={()=>this.onChange} /> */}
                             <span className='med_six_five_grey floatLeft'>选择性别:</span>
                             <div className='floatLeft dayRadio'>
                                 <Radio.Group defaultValue="a" buttonStyle="solid" >
@@ -227,8 +221,10 @@ class PatientManager extends Component{
                     </div>                   
                 </div>
                 </div>
+                
                 {/*列表数据 */}
                 <div className='tabContain'>
+                    {/* 列表上面操作部分 */}
                     <div className='handleContain clearfix'>
                         <div className='regu_seven_four_grey groupHandle floatLeft' onClick={()=>this.setState({
                             showCover:true
@@ -245,12 +241,16 @@ class PatientManager extends Component{
                             <div className='delBtn floatLeft'>
                                 <img src={require('../../asset/img/delete2.png')}></img>
                             </div>
-                            <div className='addBtn floatLeft'>
+                            <div className='addBtn floatLeft' onClick={()=>{
+                                browserHistory.push('/patientManager/addPatient')
+                            }}>
                                 <span className='med_seven_five_white'>添加</span>
                             </div>
                         </div>
                     </div>
+                    {/* 列表数据渲染 */}
                     <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={false}/>
+                    {/* 分组操作弹窗部分 */}
                     {
                         this.state.showCover?
                         <div className='coverView' onClick={()=>this.setState({
@@ -258,19 +258,11 @@ class PatientManager extends Component{
                         })}>
                                 <div className='groupCover' onClick={(e)=>{
                                     e.stopPropagation()
-                                    console.log(e)
                                 }}>
                                     <div className='coverTitle'>                                    
                                         <span className='bold_elev_bold_grey '>复制到分组</span>
                                         <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
                                     </div>
-                                    {/* <Select tags
-                                        style={{ width: '80%' }}
-                                        searchPlaceholder="标签模式"
-                                        onChange={handleChange}
-                                    >
-                                        {children}
-                                    </Select> */}
                                     <div>
                                         <div className='groupSelect med_sixHalf_five_grey' style={{background:'#DEE1E2'}}>
                                             低血压

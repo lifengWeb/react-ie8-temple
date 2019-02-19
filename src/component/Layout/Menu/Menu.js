@@ -27,6 +27,13 @@ const Sider = React.createClass({
       current: e.key,
     });
   },
+  componentDidMount(){
+    const href = window.location.href;
+    let key = href.split('/')[3];
+    this.setState({
+      current:key
+    })
+  },
   render() {
     const {current} = this.state;   
     return (

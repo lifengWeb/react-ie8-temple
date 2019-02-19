@@ -103,6 +103,10 @@ img {
     color:rgba(134,138,144,1);
     padding-left:2rem;
     line-height: 2rem;
+    box-shadow:0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+    border-radius:4px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #F0F1F2
 }
 .borderBottom{
     border-bottom: 1px solid #F0F1F2
@@ -117,10 +121,40 @@ img {
     top:0;
     z-index: 999;
 }
+/*标题前蓝色图*/
+.blueTitleMark{
+    width:0.2rem;
+    height:0.9rem;
+    background:rgba(3,211,216,1);
+    margin-right: 0.5rem;
+}
+
+/* 上传组件样式 */
+.uploadContain{
+    width:16.05rem;
+    height:43.7rem;
+    border:0.05px solid rgba(222, 225, 226, 1);
+    background:rgba(255,255,255,1); 
+    padding: 1rem 1rem 0 1rem;
+}
+
+.upaloadArea{
+    width: 14rem;
+    height: 6rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+.uploadIcon{
+    width: 1.3rem;
+    height: 1.6rem;
+}
+.uploadMargin{
+    margin: 0.3rem 0 0.2rem 0;
+}
 
 /*antd重写样式*/
 /*选择区域radio重写样式*/
-.dateChoose .ant-radio-button-wrapper{
+.ant-radio-button-wrapper{
     /* background:rgba(241,242,244,1); */
     width:3.35rem;
     height:1.6rem;
@@ -138,7 +172,7 @@ img {
     color: black;
 }
 
-.dateChoose .ant-radio-button-wrapper-checked{
+.ant-radio-button-wrapper-checked{
     background:rgba(3,211,216,1);
     color: #fff;
 }

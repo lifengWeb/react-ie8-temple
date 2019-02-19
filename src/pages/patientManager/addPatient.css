@@ -1,0 +1,130 @@
+/* 添加患者样式 */
+.addPatientContain{
+    width: 58rem;
+    height: 100%;
+    margin: 0 auto;
+}
+/* 头部标题按钮 */
+.addPatientContain .containHandle{
+    width: 58rem;
+    padding: 0.5rem 0 0.5rem 0;
+    /* height: 2rem; */
+    box-sizing: border-box;
+}
+.containHandle .leftTitle{
+    height: 2rem;
+    line-height: 2rem;
+}
+.addPatientContain .btnContain{
+    width: 10rem;
+}
+.addPatientContain .cancelBtn{
+    background:rgba(240,241,242,1);
+}
+.addPatientContain .confirmBtn{
+    background:rgba(3,211,216,1);
+    margin-left:1rem; 
+}
+.addPatientContain .cancelBtn,.addPatientContain .confirmBtn{
+    width:3.5rem;
+    height:1.5rem;
+    border:0.05px solid;
+    border-image:linear-gradient(0deg, rgba(20,170,181,1), rgba(27,195,220,1)) 0.05 0.05;
+    border-radius:0rem 0rem 0rem 0rem;
+    line-height: 1.5rem;    
+}
+/* 基本信息样式 */
+.addPatientContain .patientInfoContain{
+    /* margin-top: 1rem; */
+    height: 43.7rem;
+    width: 58rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.patientInfoContain .basicInfo{  
+    height:19.91rem;
+}
+.patientInfoContain .basicInfo,.basicInfoContain .devInfo,.basicInfoContain .configInfo{
+    width:41.65rem;
+    height:19.91rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    padding: 1rem 2rem 1rem 2rem;
+    box-sizing: border-box;
+    padding: 1rem 2rem 1rem 2rem;
+}
+.basicInfoContain .devInfo{
+    height:7.12rem;   
+    margin: 1rem 0 1rem 0;
+}
+.basicInfoContain .configInfo{ 
+    height:15.32rem;  
+}
+.basicInfoContain{
+    width:41.65rem;
+    height: 43.7rem;
+    margin-right: 0.3rem;
+    box-sizing: border-box;
+}
+.basicInfoContain .basicInfoItem{
+    width:36.95rem;
+}
+.magrRight{
+    margin-right: 1rem;
+}
+.basicInfoContain .infoLable{
+    margin: 1rem 0 0.3rem 0;
+}
+.basicInfoContain input{
+    height:1.6rem;
+    background:rgba(241,242,244,1);
+    border-radius:2px;
+    padding-left: 0.3rem;
+}
+.basicInfoContain .nameInfo{
+    width:36.95rem;
+}
+.basicInfoContain .cardInfo{
+    width: 25rem;
+}
+.ageInfo{
+    width:10.1rem;
+}
+.socityInfo{
+    width:13.15rem;
+}
+
+.bindDev{
+    width:36.95rem;
+    height:1.8rem;
+    background:rgba(241,242,244,1);
+    border-radius:2px;
+    text-align: center;
+    line-height: 1.8rem;
+    margin-top: 1rem;
+}
+.extralArea{
+    width:36.95rem;
+    height:9.3rem;
+    background:rgba(241,242,244,1);
+    resize:none;
+    margin-top: 1rem;
+    padding:0.3rem;
+}
+
+
+.fileItem{
+    margin-top: 1rem;
+}
+
+
+
+
+
+/* 重新antd样式 */
+.ant-checkbox{
+    font-size:0.65rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(47,49,54,1);
+}
