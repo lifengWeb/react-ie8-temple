@@ -83,7 +83,7 @@ class PatientManager extends Component{
                             }}
                             onMouseOver={(e)=>{
                                 this.setState({showItem:record.key})
-                            }}>
+                            }} className='patiManagerTips'>
                             <span
                                 style={showItem==record.key?{color:'#03D3D8'}:{}}
                             >
@@ -124,7 +124,7 @@ class PatientManager extends Component{
               key: 'operation',
               render: () => (
                 <span>
-                  <a href="#">详情</a>
+                  <a href="patientManager/PatientDetail">详情</a>
                   <a href="#">编辑</a>
                   <a href="#">删除</a>
                   {/* <span className="ant-divider"></span> */}

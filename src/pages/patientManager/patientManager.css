@@ -68,7 +68,7 @@
     height:0.65rem;
     margin-right: 0.3rem;
 }
-.tipsContain{
+.patiManagerTips .tipsContain{
     width:10rem;
     height:7.6rem; 
     background:rgba(255,255,255,1);
@@ -79,19 +79,19 @@
     right:0;
     z-index: 999;
 }
-.tipsContain .tipsTitle{
+.patiManagerTips .tipsContain .tipsTitle{
     width: 10rem;
     line-height: 2rem;
     padding: 0 1rem 0 1rem;
     height: 2rem;
     border-bottom: 1px solid #F0F1F2;   
 }
-.tipsContain .tipsItem{
+.patiManagerTips .tipsContain .tipsItem{
     width: 10rem;
     height: 3rem;
     padding: 0 1rem 0 1rem;
 }
-.tipsContain .tipsMark{
+.patiManagerTips .tipsContain .tipsMark{
     width:0.1rem;
     height:0.6rem;
     background:rgba(3,211,216,1);

@@ -152,6 +152,19 @@ img {
     margin: 0.3rem 0 0.2rem 0;
 }
 
+::-webkit-scrollbar {/*隐藏滚轮*/
+    display: none;
+}
+.hide{
+    display: none;
+}
+.margLeftDouble{
+    margin-left: 2rem
+}
+.margLeft{
+    margin-left: 1rem
+}
+
 /*antd重写样式*/
 /*选择区域radio重写样式*/
 .ant-radio-button-wrapper{

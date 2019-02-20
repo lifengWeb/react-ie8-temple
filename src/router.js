@@ -14,6 +14,7 @@ const FollowUpManager = require('./pages/followUpManager/FollowUpManager');
 
 const PatientManager = require('./pages/patientManager/PatientManager');
 const AddPatient = require('./pages/patientManager/AddPatient');
+const PatientDetail = require('./pages/patientManager/PatientDetail');
 
 
 const ReminderManager = require('./pages/reminderManager/ReminderManager');
@@ -23,7 +24,7 @@ const CommunityManager = require('./pages/communityManager/CommunityManager');
 const style={
   sider:{height:'100%',margin:'1rem 1rem 0 3rem',background:'#fff',width:'10rem',overflow:'hidden'},
   rightContain:{
-    width:'82rem',
+    width:'81rem',
     height:'100%',
     padding:'1rem 2rem 2rem 0',
     overflow:'scroll',
@@ -34,7 +35,7 @@ const App = React.createClass({
     return (
       <div style={{height:'100%',backgroundColor:'#F0F1F2',overflow:'hidden',width:'100%'}} className='clearfix'>
         <Header></Header>
-        <div style={{height:'100%',width:'100%'}}>
+        <div style={{height:'100%',width:'100%'}} className='clearfix'>
           <div style={style.sider} className='floatLeft'>          
             <Sider></Sider>
           </div>      
@@ -58,6 +59,7 @@ ReactDOM.render((
       {/* 患者管理 */}
       <Route path='patientManager' component={PatientManager}/>
       <Route path='patientManager/addPatient' component={AddPatient}/>
+      <Route path='patientManager/PatientDetail' component={PatientDetail}/>
 
       <Route path='reminderManager' component={ReminderManager}/>
       <Route path='adminManager' component={AdminManager}/>

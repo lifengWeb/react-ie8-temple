@@ -56,11 +56,29 @@
     font-weight:bold;
     color:rgba(47,49,54,1);
 }
+.blod_eight_five_black{
+    font-size:0.8rem;
+    font-family:PingFang-SC-Bold;
+    font-weight:bold;
+    color:rgba(47,49,54,1);
+}
+.blod_ten_five_Black{
+    font-size:1rem;
+    font-family:PingFang-SC-Bold;
+    font-weight:bold;
+    color:rgba(47,49,54,1)
+}
 .med_seven_five_Black{
     font-size:0.7rem;
     font-family:PingFang-SC-Medium;
     font-weight:500;
     color:rgba(25,29,33,1);
+}
+.med_sixHalf_five_DarkBlack{
+    font-size:0.65rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(15,21,25,1);
 }
 .med_sixHalf_five_Black{
     font-size:0.65rem;

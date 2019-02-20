@@ -1,0 +1,105 @@
+.patientDetail .TabsContain{
+    margin-right: 34rem;
+    overflow: hidden;
+    height: 2rem;
+}
+/* 提醒页面 */
+.patientDetail .tipUsingContain,.patientDetail .historyTipsContain{
+    width:80rem;
+    background:rgba(255,255,255,1);
+    border:0px solid rgba(209,209,209,1);
+}
+
+.patientDetail .tipUsingContain{
+    height:12.96rem;
+    margin: 1rem 0 2rem 0;
+
+}
+.patientDetail .historyTipsContain{
+    height:30.96rem;
+}
+.patientDetail .tipsItem,.patientDetail .tipsTitle{
+    height: 4rem;
+    box-sizing: border-box;    
+    border-bottom: 1px solid rgba(209,209,209,0.6);
+}
+.patientDetail .tipsTitle{
+    line-height: 4rem;
+}
+.patientDetail .tipsItem{
+    padding: 1rem;
+    line-height: 1rem;
+}
+.tipsItem a{
+    display: inline-block;
+    margin-left: 2rem;
+}
+.tipsItem:nth-last-of-type(1){
+    border-bottom: none;
+}
+.historyTipsContain div:nth-last-of-type(2){
+    border-bottom: none;
+}
+.patientDetail .blueTitleMark{
+    margin-top: 1.55rem;
+    margin-left: 1rem;
+}
+/* 提醒页面操作弹窗 */
+.patientDetail .delCover{
+    width:40rem;
+    height:11.9rem;
+}
+.pd_coverLabel{
+    width: 5rem;
+    display: inline-block;
+}
+.pd_coverLabelDiv{
+    margin-bottom: 1rem;
+}
+.pd_detailCover{
+    width:45rem;
+    height:14.4rem;
+}
+.pd_sendTime{
+    width:32.3rem;
+    height:2.74rem;
+    background:rgba(240,241,242,1);
+    border-radius:0rem; 
+}
+
+/* 随访信息 */
+.pd_followUpContain{
+    width: 60rem;
+    /* margin-left:8rem; */
+    margin: 1rem auto;
+}
+.pd_followShotMsg{
+    width: 16rem;
+    height: 46rem;
+    background:rgba(255,255,255,1);
+    border:0px solid rgba(223,226,227,1);
+    margin-right: 1rem;
+}
+.pd_followShotMsgItem{
+    width: 16rem;
+    height: 6rem;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(223,226,227,1);
+}
+.pd_choosed{
+    background: #F0F1F2;
+    border:1px solid rgba(196,202,209,1);
+}
+.pd_itemCenterMargin{
+    margin: 0.6rem 0 1.2rem 0 ;
+}
+.pd_followUpDetail{
+    width:42.95rem;
+    height:46.01rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    padding: 2rem 3rem 0 3rem;
+}
+.pd_followUpDetailTitle{
+    margin: 0 auto;
+}

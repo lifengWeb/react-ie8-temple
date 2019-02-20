@@ -86,7 +86,7 @@
     right:1rem;
     padding: 1rem 0.5rem 0.5rem 1rem;
 }
-.tipsTitle{
+.header .tipsTitle{
     margin-bottom: 0.5rem;
     width: 21.5rem;
     box-sizing: border-box;

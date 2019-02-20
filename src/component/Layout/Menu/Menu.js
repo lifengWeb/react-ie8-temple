@@ -30,9 +30,11 @@ const Sider = React.createClass({
   componentDidMount(){
     const href = window.location.href;
     let key = href.split('/')[3];
-    this.setState({
-      current:key
-    })
+    if(key){
+      this.setState({
+        current:key
+      })
+    }    
   },
   render() {
     const {current} = this.state;   

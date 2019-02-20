@@ -31,8 +31,7 @@ class AddPatient extends Component {
         return(
             <div>
                 <div className='nav'>                
-                    <span className='med_seven_five_grey'>患者管理</span>                 
-                    <span>添加患者</span>
+                    <span className='med_seven_five_grey'>患者管理 > 添加患者</span>
                 </div>               
                 <div className='addPatientContain'>
                      {/* 头部操作 */}
