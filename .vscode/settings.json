@@ -1,0 +1,5 @@
+{
+    // "workbench.editor.closeEmptyGroups": false,//下面三个是html自动补全的配置
+    "emmet.triggerExpansionOnTab": true,
+    // "files.associations": {"*.js": "html"}
+}

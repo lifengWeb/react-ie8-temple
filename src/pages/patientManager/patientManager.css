@@ -117,11 +117,14 @@
     height:2rem;
     background:rgba(245,245,245,1);
     border-radius:50%;
+    margin-right: 2rem;
 }
 .coverTitle{
     padding: 1rem 0  2rem 2rem;
     text-align:justify;
-    width: 37rem;
+    /* width: 37rem; */
+    width: 100%;
+    box-sizing: border-box;
 }
 .groupSelect{
     width:36.5rem;
@@ -139,7 +142,8 @@
     margin: 0.5rem 0.5rem 0 0;
 }
 .groupHandleBtm{
-    width:40rem;
+    /* width:40rem; */
+    width: 100%;
     height:2.8rem;
     background:rgba(240,241,242,1);
     border-radius:2px;

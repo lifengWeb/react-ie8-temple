@@ -121,6 +121,7 @@ class DataStatistics extends Component{
     render(){
         return(
             <div>                
+                <div className='navTop'></div>
                 <div className='nav'>                
                     <span className='med_seven_five_grey'>统计图表</span>
                 </div>

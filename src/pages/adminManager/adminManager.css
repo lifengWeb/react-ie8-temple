@@ -1,0 +1,24 @@
+.coverView .am_adminCover{
+    width:40rem;
+    height:22.4rem;
+}
+.am_adminCoverContain{
+    width: 16rem;
+    margin: 0 auto;
+}
+.am_headImg{
+    width:3.85rem;
+    height:3.85rem;
+    background:rgba(240,241,242,1);
+    border:0px solid rgba(222,225,226,1);
+    border-radius:50%;
+    margin: 0 auto;
+}
+.am_inputItem{
+    width:15.7rem;
+    height:1.7rem;
+    border:1px solid rgba(222,225,226,1);
+    border-radius:0rem;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+}

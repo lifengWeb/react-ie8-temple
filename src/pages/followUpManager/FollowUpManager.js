@@ -1,6 +1,6 @@
 //随访管理
 import React ,{Component} from 'react';
-
+import { browserHistory } from 'react-router';
 const Breadcrumb = require('antd/lib/breadcrumb');
 const Radio = require('antd/lib/radio');
 
@@ -12,6 +12,72 @@ const Option = Select.Option;
 
 const Table = require('antd/lib/table');
 const Pagination = require('antd/lib/pagination');
+
+import { Menu, Dropdown } from 'antd';
+
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      高血压患者随访服务记录表
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="1">2型糖尿病患者随访服务记录表</Menu.Item>
+  </Menu>
+);
+
+
+
+
+//弹窗搜索框
+import { Input,Button} from 'antd';
+import classNames from 'classnames';
+const InputGroup = Input.Group;
+const SearchInput = React.createClass({
+  getInitialState() {
+    return {
+      value: '',
+      focus: false,
+    };
+  },
+  handleInputChange(e) {
+    this.setState({
+      value: e.target.value,
+    });
+  },
+  handleFocusBlur(e) {
+    this.setState({
+      focus: e.target === document.activeElement,
+    });
+  },
+  handleSearch() {
+    if (this.props.onSearch) {
+      this.props.onSearch(this.state.value);
+    }
+  },
+  render() {
+    const { style, size, placeholder } = this.props;
+    const btnCls = classNames({
+      'ant-search-btn': true,
+      'ant-search-btn-noempty': !!this.state.value.trim(),
+    });
+    const searchCls = classNames({
+      'ant-search-input': true,
+      'ant-search-input-focus': this.state.focus,
+    });
+    return (
+      <div className="ant-search-input-wrapper" style={style}>
+        <InputGroup className={searchCls}>
+          <Input placeholder={placeholder} value={this.state.value} onChange={this.handleInputChange}
+            onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.handleSearch}
+          />
+          <div className="ant-input-group-wrap">
+            <Button icon="search" className={btnCls} size={size} onClick={this.handleSearch} />
+          </div>
+        </InputGroup>
+      </div>
+    );
+  },
+});
 
 require('../patientManager/patientManager.css');
 require('./followUpManager.css');
@@ -48,6 +114,7 @@ class FollowUpManager extends Component{
     onChange(value, dateString){
         console.log(value, dateString);
     }
+    c
     render(){
         const columns = [{
             title: '编号',
@@ -78,11 +145,27 @@ class FollowUpManager extends Component{
               title: '操作',
               key: 'operation',
               render: () => (
-                <span>
-                  <a href="#">查看记录</a>                
+                <span onClick={()=> browserHistory.push('/followUpManager/followUpDetail')}>
+                  <a>查看记录</a>                
                 </span>
               ),
             }];
+            const columnsCover = [{
+              title: '姓名',
+              dataIndex: 'name',
+            }, {
+              title: '社区',
+              dataIndex: 'address',
+            },{
+                title: '证件号码',
+                dataIndex: 'age',
+              }, {
+                title: '年龄',
+                dataIndex: 'age1',
+              }, {
+                title: '病症分组',
+                dataIndex: 'age2',
+              }];
           const data = [{
             key: '1',
             name: '胡彦斌',
@@ -105,9 +188,16 @@ class FollowUpManager extends Component{
             address: '西湖区湖底公园1号',
           }];
         return(
-             <div>                
+             <div>         
+                <div className='navTop'></div>       
                 <div className='nav'>                
                     <span className='med_seven_five_grey'>随访管理</span>
+                    <Dropdown overlay={menu} trigger={['click']}>
+                    <span className="ant-dropdown-link floatRight">
+                      查看我的随访表单
+                      <img src={require('../../asset/img/close.png')} className='dropDownIcon'/>
+                    </span>
+                  </Dropdown>
                 </div>
                 <div>
                 {/* 筛选区域*/}
@@ -174,11 +264,130 @@ class FollowUpManager extends Component{
                             <span className='regu_seven_four_grey'>刷新</span>
                         </div>
                         <div className='floatRight'> 
-                            <div className='addBtn addBtnFollowUp floatLeft'>
+                            <div className='addBtn addBtnFollowUp floatLeft' onClick={()=>this.setState({
+                              showOneStep:true,
+                              showCover:true,
+                            })}>
                                 <span className='med_seven_five_white'>添加一次随访</span>
                             </div>
                         </div>
                     </div>
+                    {/* 添加随访弹窗 */}
+                    {
+                      this.state.showCover?
+                    <div className='coverView' onClick={()=>this.setState({
+                            showCover:false
+                        })}>
+                        {/* 第一步操作弹窗 */}
+                                <div className={this.state.showOneStep?'groupCover':'hide'} onClick={(e)=>{
+                                    e.stopPropagation();
+                                }}>
+                                    <div className='coverTitle clearfix' style={{verticalAlign:"middle"}}>    
+                                        <span className='fup_raduisGrey'>1</span>                                
+                                        <span className='bold_elev_bold_grey'>选择要使用的随访表单</span>
+                                        <span className='gerycolor'> － </span>
+                                        <span className='bold_elev_bold_grey gerycolor'>2</span>
+                                        <span className='bold_elev_bold_grey gerycolor'> 选择要随访的对象</span>
+                                        <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
+                                    </div>
+                                    <div>
+                                        <div className='groupSelect med_sixHalf_five_DarkBlack' style={{background:'#DEE1E2'}}>
+                                            低血压
+                                            <img src={require('../../asset/img/xuanzhong.png')} className='choosedImg floatRight'></img>
+                                        </div>
+                                        <div className='groupSelect med_sixHalf_five_DarkBlack'>
+                                            高血压
+                                            <img src={require('../../asset/img/xuanzhong.png')} className='choosedImg floatRight'></img>
+                                        </div>
+                                        <div className='groupSelect med_sixHalf_five_grey'>
+                                            低血糖
+                                            <img src={require('../../asset/img/xuanzhong.png')} className='choosedImg floatRight'></img>
+                                        </div>
+                                    </div>
+                                    <div className='groupHandleBtm'>
+                                        <div className='floatRight'>
+                                                <div className='cancelBtn med_eight_five_grey floatLeft' onClick={()=>this.setState({
+                                                  showOneStep:false,
+                                                  showCover:false
+                                                })}>取消</div>
+                                                <div className='confirmBtn med_eight_five_white floatRight' onClick={()=>this.setState({
+                                                  showOneStep:false,
+                                                  showTwoStep:true,
+                                                })}>确认</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* 第二部操作弹窗 */}
+                                <div className={this.state.showTwoStep?'groupCover fup_choosePatientCover':'hide'} onClick={(e)=>{
+                                    e.stopPropagation()
+                                }}>
+                                    <div className='coverTitle clearfix' style={{verticalAlign:"middle"}}>    
+                                        <span className='fup_raduisGrey'>1</span>                                
+                                        <span className='bold_elev_bold_grey'>选择要使用的随访表单</span>
+                                        <span > － </span>
+                                        <span className='bold_elev_bold_grey'>2</span>
+                                        <span className='bold_elev_bold_grey'> 选择要随访的对象</span>
+                                        <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
+                                    </div>
+                                    <div className='chooseDayItem clearfix'>
+                                        <span className='med_six_five_grey floatLeft'>病症分组:</span>
+                                        <div className='floatLeft dayRadio'> 
+                                          <Select showSearch
+                                              style={{ width: 200 }}
+                                              placeholder="请选择病症分组"
+                                              optionFilterProp="children"
+                                              notFoundContent="无法找到"
+                                              onChange={()=>this.handleChange}
+                                          >
+                                              <Option value="jack">杰克</Option>
+                                              <Option value="lucy">露西</Option>
+                                              <Option value="tom">汤姆</Option>
+                                          </Select>
+                                        </div>
+                                        <span className='med_six_five_grey floatLeft'>选择社区:</span>
+                                        <div className='floatLeft dayRadio'> 
+                                          <Select showSearch
+                                              style={{ width: 200 }}
+                                              placeholder="请选择社区"
+                                              optionFilterProp="children"
+                                              notFoundContent="无法找到"
+                                              onChange={()=>this.handleChange}
+                                          >
+                                              <Option value="jack">杰克</Option>
+                                              <Option value="lucy">露西</Option>
+                                              <Option value="tom">汤姆</Option>
+                                          </Select>
+                                        </div>
+                                        <div className='floatRight'>
+                                          <SearchInput placeholder="搜索"
+                                            onSearch={value => console.log(value)} style={{ width: 200 }}
+                                          />
+                                        </div>
+                                    </div>
+                                    <div>
+                                     <Table rowSelection={rowSelection} columns={columnsCover} dataSource={data} pagination={false}/> 
+                                    </div>
+                                    <div className='groupHandleBtm'>
+                                        <div className='floatRight'>
+                                                <div className='cancelBtn med_eight_five_grey floatLeft'onClick={()=>this.setState({
+                                                  showOneStep:true,
+                                                  showTwoStep:false,
+                                                })}>上一步</div>
+                                                <div className='confirmBtn med_eight_five_white floatRight'
+                                                onClick={()=>{this.setState({
+                                                  showOneStep:false,
+                                                  showTwoStep:false,
+                                                  showCover:false
+                                                });
+                                                browserHistory.push('/followUpManager/enterFollowUpInfo')
+                                                // window.location.href = '/followUpManager/enterFollowUpInfo';
+                                                }}>开始填写</div>
+                                        </div>
+                                    </div>
+                                </div>                            
+                        </div>:''
+                        
+                    }
                      {/*列表数据渲染 */}
                     <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={false}/>   
                     <div style={{margin:'1rem auto',width:'23.5rem'}}>                    

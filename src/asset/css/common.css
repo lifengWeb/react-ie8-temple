@@ -66,6 +66,12 @@ input, textarea {
     outline: none;
     border: none;
 }
+textarea{
+    resize:none;
+}
+input{
+    vertical-align:middle;
+}
 img {
     border: none;
     vertical-align: middle;
@@ -93,6 +99,14 @@ img {
     height: 100%;
 }
 /*页面顶部面包屑*/
+.navTop{
+    position: fixed;
+    top:3rem;
+    z-index: 999;
+    height: 1rem;
+    width: 80rem;
+    background: rgb(240,240,240)
+}
 .nav{
     width: 80rem;
     height: 2rem;
@@ -106,10 +120,16 @@ img {
     box-shadow:0px 4px 8px 0px rgba(0, 0, 0, 0.1);
     border-radius:4px;
     box-sizing: border-box;
-    border-bottom: 1px solid #F0F1F2
+    border-bottom: 1px solid #F0F1F2;
+    position: fixed;
+    top:4rem;
+    z-index: 999;
 }
 .borderBottom{
     border-bottom: 1px solid #F0F1F2
+}
+.marginBtm{
+    margin-bottom: 1rem;
 }
 /*弹窗遮罩层*/
 .coverView{
@@ -151,10 +171,10 @@ img {
 .uploadMargin{
     margin: 0.3rem 0 0.2rem 0;
 }
-
-::-webkit-scrollbar {/*隐藏滚轮*/
+/*隐藏滚轮*/
+/* ::-webkit-scrollbar {
     display: none;
-}
+} */
 .hide{
     display: none;
 }
@@ -169,7 +189,8 @@ img {
 /*选择区域radio重写样式*/
 .ant-radio-button-wrapper{
     /* background:rgba(241,242,244,1); */
-    width:3.35rem;
+    /* width:3.35rem; */
+    padding:0.5rem 1rem 0.5rem 1rem;
     height:1.6rem;
     background:#DEE1E2;
     box-shadow:0rem 0rem 0rem 0rem rgba(0, 0, 0, 0.1);

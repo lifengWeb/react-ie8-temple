@@ -124,7 +124,9 @@ class PatientManager extends Component{
               key: 'operation',
               render: () => (
                 <span>
-                  <a href="patientManager/PatientDetail">详情</a>
+                  <span onClick={
+                    ()=>this.props.history.push("patientManager/PatientDetail")
+                  }> <a>详情</a></span>  
                   <a href="#">编辑</a>
                   <a href="#">删除</a>
                   {/* <span className="ant-divider"></span> */}
@@ -154,7 +156,8 @@ class PatientManager extends Component{
             address: '西湖区湖底公园1号',
           }];
         return(
-             <div>                
+             <div>         
+                <div className='navTop'></div>           
                 <div className='nav'>                
                     <span className='med_seven_five_grey'>患者管理</span>
                 </div>

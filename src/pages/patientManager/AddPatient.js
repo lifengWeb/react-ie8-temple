@@ -30,6 +30,7 @@ class AddPatient extends Component {
     render(){
         return(
             <div>
+                <div className='navTop'></div>
                 <div className='nav'>                
                     <span className='med_seven_five_grey'>患者管理 > 添加患者</span>
                 </div>               

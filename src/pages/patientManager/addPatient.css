@@ -24,6 +24,7 @@
 .addPatientContain .confirmBtn{
     background:rgba(3,211,216,1);
     margin-left:1rem; 
+    margin-right: 0;
 }
 .addPatientContain .cancelBtn,.addPatientContain .confirmBtn{
     width:3.5rem;

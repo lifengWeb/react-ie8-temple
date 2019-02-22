@@ -5,3 +5,40 @@
 .addBtnFollowUp{
     width: 6rem;
 }
+.fup_raduisGrey{
+    width:1.5rem;
+    height:1.5rem;
+    background:rgba(134,138,144,1);
+    border-radius:50%;
+    text-align: center;
+    line-height: 1.5rem;
+    color: white;
+    margin-right: 0.3rem;
+    display: inline-block;
+}
+/* .fup_chooseForm{
+    width:46rem;
+    height:24.25rem;
+} */
+.fup_choosePatientCover{
+    height: 39rem;
+    top:6rem;
+    width: 46rem;
+}
+.fup_choosePatientCover .coverTitle{
+    width: 46rem;
+    padding-right: 2rem;
+}
+.fup_choosePatientCover .chooseDayItem{
+    padding: 0 2rem 0 2rem;
+}
+.gerycolor{
+    color:rgba(134,138,144,1);
+    opacity: 0.5;
+}
+.dropDownIcon{
+    width:0.45rem;
+    height:0.25rem;
+    transform:rotate(90deg);
+    margin-right: 0.5rem;
+}

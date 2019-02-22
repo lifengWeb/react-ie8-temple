@@ -1,0 +1,39 @@
+.ar_Contain{
+    width: 58rem;
+    margin: 0 auto;
+}
+.ar_ContainTitle{
+    padding: 0.5rem 0 0.5rem;
+}
+.ar_cancelBtn,.ar_confirmBtn{
+    text-align: center;
+    width:3.5rem;
+    height:1.5rem;
+    line-height:1.5rem;
+}
+.ar_cancelBtn{   
+    background:rgba(240,241,242,1);  
+    border-image:linear-gradient(0deg, rgba(199,199,199,1), rgba(224,224,224,1)) 0.05 0.05;  
+}
+.ar_confirmBtn{   
+    font-size:0.7rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    background:#03D3D8;  
+}
+
+.ar_leftRule{
+    width:41.65rem;
+    height:40.91rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    margin-right: 0.3rem;
+    padding: 1rem 2rem 3rem 2rem;
+    box-sizing: border-box;
+}
+.ar_rightPatient{
+    width:16.05rem;
+    height:40.85rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+}

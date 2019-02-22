@@ -93,6 +93,7 @@
 .pd_itemCenterMargin{
     margin: 0.6rem 0 1.2rem 0 ;
 }
+/* 随访信息表 */
 .pd_followUpDetail{
     width:42.95rem;
     height:46.01rem;
@@ -100,6 +101,31 @@
     border:0.05px solid rgba(222, 225, 226, 1);
     padding: 2rem 3rem 0 3rem;
 }
+.pd_followUpDetailHeader{
+    width:37.85rem;
+    height: 3rem;
+    text-align: center;
+}
 .pd_followUpDetailTitle{
     margin: 0 auto;
+}
+.pd_followUpDetailDoc{
+    margin: 0.6rem 0 0.3rem 0 
+}
+.pd_patientInfo{
+    width:37.85rem;
+    height:8.2rem;
+}
+.pd_firstRow{
+    width: 15rem;
+    margin-left: 2rem;
+}
+.pd_secondRow{
+    width: 11rem;
+}
+.pd_rowItem{
+    margin-top: 1.8rem;
+}
+.pd_followUpTableContain{
+    margin-top: 2rem;
 }
