@@ -19,7 +19,7 @@ class ReminderManager extends Component {
                 <div className='navTop'></div>
                 <div className='nav'>                
                     <span className='med_seven_five_grey'>提醒管理</span>
-                    <span className='floatRight'>运行中的提醒规则 >> </span>
+                    <span className='floatRight' onClick={()=>this.props.history.push('/reminderManager/usingReminder')}>运行中的提醒规则 >> </span>
                 </div>
                 <div className='rm_Contain'>
                     <div className='rm_chooseTme'>

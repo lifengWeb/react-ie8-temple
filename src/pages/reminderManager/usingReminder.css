@@ -1,0 +1,18 @@
+.ur_reminderContain{
+    width:80rem;
+    height:18.76rem;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(222,225,226,1);
+    margin-top: 0.5rem;
+}
+.ur_reminderItem{
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #DEE1E2;
+}
+.ur_reminderItemTitle{
+    margin-bottom: 0.5rem;
+}
+.ur_centerSpan{
+    display: inline-block;
+    margin: 0 0.5rem;
+}

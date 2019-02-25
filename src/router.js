@@ -22,6 +22,7 @@ const PatientDetail = require('./pages/patientManager/PatientDetail');
 //提醒管理
 const ReminderManager = require('./pages/reminderManager/ReminderManager');
 const AddReminder = require('./pages/reminderManager/AddReminder');
+const UsingReminder = require('./pages/reminderManager/UsingReminder');
 
 const AdminManager = require('./pages/adminManager/AdminManager');
 const CommunityManager = require('./pages/communityManager/CommunityManager');
@@ -77,6 +78,7 @@ ReactDOM.render((
      {/* 提醒管理*/}
       <Route path='reminderManager' component={ReminderManager}/>
       <Route path='reminderManager/addReminder' component={AddReminder}/>
+      <Route path='reminderManager/usingReminder' component={UsingReminder}/>
 
       <Route path='adminManager' component={AdminManager}/>
       <Route path='communityManager' component={CommunityManager}/>

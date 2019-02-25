@@ -36,4 +36,116 @@
     height:40.85rem;
     background:rgba(255,255,255,1);
     border:0.05px solid rgba(222, 225, 226, 1);
+    position: relative;
+}
+.ar_reminderType{
+    margin: 1.5rem 0 0.5rem 0;
+}
+.ar_Input{
+    width:36.95rem;
+    height:1.6rem;
+    background:rgba(241,242,244,1);
+    border-radius:2px;
+    padding-left: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+hr{
+    background:rgba(222,225,226,1);
+    margin-bottom: 1.5rem;
+}
+.ar_customHeart{
+    width:36.9rem;
+    height:9.05rem;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(222,225,226,1);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+.ar_textArea{
+    width:36.95rem;
+    height:5.65rem;
+    background:rgba(241,242,244,1);
+    border-radius:0rem;
+    resize: none;
+    padding: 0.5rem;
+}
+.ar_setHeartTiltle{
+    margin:1.5rem 0 0.5rem 0
+}
+.ar_exceptionType{margin-bottom:0.5rem}
+.ar_customHeartItem{
+    margin:0.5rem 0 2.5rem 0;
+    height: 1rem;
+    line-height: 1rem;
+}
+.ar_addBtn{
+    width:2.4rem;
+    height:1.35rem;
+    background:rgba(2,149,210,1);
+    border-radius:0rem;
+    text-align: center;
+    /* line-height: 1.35rem; */
+}
+.ar_addImg{
+    width:0.8rem;
+    height:0.8rem;
+    background:rgba(255,255,255,1);
+}
+.ar_patientChoosedTit{
+    height: 2rem;
+    padding: 0.5rem 1rem;
+}
+.ar_patientItem{
+    padding: 0 1rem 1rem 1rem;
+}
+.ar_clearPatient{
+    width:16.05rem;
+    height:1.55rem;
+    background:rgba(241,242,244,1);
+    line-height: 1.55rem;
+    padding-right: 0.5rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.ar_clearImg{
+    width:0.55rem;
+    height:0.55rem;
+}
+.ar_defaultHeart{
+    width:36.9rem;
+    height:2.55rem;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(222,225,226,1);
+    margin-top: 0.5rem;
+    line-height: 2.55rem;
+    padding-left: 0.5rem;
+}
+.ar_followUpTtextArea{
+    height:10.95rem;
+}
+.ar_customHeartSilder{
+    height:5.15rem;
+}
+.ar_centerMarSpan{
+    margin: 0 0.5rem;
+}
+.coverView .ar_cover{
+    width:46rem;
+    height:41.25rem;
+    top:6rem;
+    left: 25rem;
+}
+.ar_coverHeader{
+    padding: 0 2rem;
+    height: 3rem;
+}
+.ar_freshDiv{
+    height:1.45rem;
+}
+.ar_refreshBtn{
+    width:3.4rem;
+    height:1.45rem;
+    border:1px solid rgba(222,225,226,1);
+    border-radius:2px;
 }

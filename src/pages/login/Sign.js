@@ -9,7 +9,8 @@ class Sign extends Component {
     
     render(){
         return(
-            <div>                
+            <div>             
+                <div className='navTop'></div>   
                 <div className='nav'>                
                     <span className='med_seven_five_grey'>患者管理</span>
                 </div>
