@@ -47,6 +47,7 @@ class ReminderManager extends Component {
                             </div>
                         </div>
                     </div>
+                    {/*提醒列表部分 */}
                     <div className='rm_reminList'>
                             <div className="rm_reminListTitle borderBottom">
                                 <img src={require('../../asset/img/dropDown.png')} className='rm_dropImg'></img>

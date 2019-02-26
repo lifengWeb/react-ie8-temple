@@ -1,11 +1,55 @@
 import React, { Component } from 'react';
 const style = require('./patientDetail.css');
-import { Tabs } from 'antd';
+import { Tabs ,Table} from 'antd';
 const TabPane = Tabs.TabPane;
+const Upload = require('antd/lib/upload');
+const Dragger = Upload.Dragger;
 const Pagination = require('antd/lib/pagination');
+const Radio = require('antd/lib/radio');
+const DatePicker = require('antd/lib/date-picker');
+const RangePicker = DatePicker.RangePicker;
 function callback(key) {
   console.log(key);
 }
+const props = {
+    name: 'file',
+    showUploadList: false,
+    action: '/upload.do',
+  };  
+const columns = [{
+    title: '监测项',
+    dataIndex: 'name',
+  }, {
+    title: '监测详细信息',
+    dataIndex: 'age',
+  }, {
+    title: '最近一次测量时间',
+    dataIndex: 'address',
+  }, {
+    title: '当前状态',
+    dataIndex: 'address1',
+  }, {
+    title: '操作',
+    dataIndex: 'address2',
+  }];
+  
+  const data = [{
+    key: '血压',
+    name: '胡彦斌',
+    age: 32,
+    address: '西湖区湖底公园1号',
+  }, {
+    key: '心率',
+    name: '胡彦祖',
+    age: 42,
+    address: '西湖区湖底公园1号',
+  }, {
+    key: '手腕温度',
+    name: '李大嘴',
+    age: 32,
+    address: '西湖区湖底公园1号',
+  }];
+
 
  
 class PatientDetail extends Component {
@@ -13,7 +57,8 @@ class PatientDetail extends Component {
         super(props);
         this.state={
             showCover:false,
-            key:2
+            key:1,
+            bloodStatus:1,//异常类别状态 1 全部状态 2 未处理
         }
     }
     changeTab(key){
@@ -23,7 +68,8 @@ class PatientDetail extends Component {
     
     render(){
         return(
-            <div className='patientDetail'>                
+            <div className='patientDetail'>        
+                <div className='navTop'></div>           
                 <div className='nav clearfix'>                
                     <span className='med_seven_five_grey'>患者管理 > 详情</span>
                     <div className='floatRight TabsContain med_seven_five_grey'>
@@ -38,9 +84,159 @@ class PatientDetail extends Component {
                     </div>
                 </div>
                 {/* 患者信息页面 */}
-                {/* <div className='patientInfoContain'>
-                    
-                </div> */}
+                {
+                    this.state.key==1?
+                    <div className='patientInfoContain'>
+                        {/*左边详细信息*/}
+                        <div className='pd_LeftContain floatLeft'>
+                            <div className="pd_title blod_ten_five_Black">患者详细信息</div>
+                            <div className='floatRight med_six_five_grey pd_lastTime'>上一次编辑于：2019/01/01 </div>
+                            <div className='pd_basicInfo'>
+                                <span className='pd_blueTitleMark'></span>
+                                <span className='regu_six_four_grey'>基本信息</span>
+                                <div className='pd_userInfoItem clearfix'>
+                                    <div className='pd_userInfoItemColumn floatLeft'>
+                                        <span className='blod_sixHalf_five_black'>患者姓名: </span>
+                                        <span className='med_sixHalf_five_Black'>徐达</span>
+                                    </div>
+                                    <div className='pd_userInfoItemColumnSec floatLeft'>
+                                        <span className='blod_sixHalf_five_black'>性别: </span>
+                                        <span className='med_sixHalf_five_Black'>男</span>
+                                    </div>
+                                    <div className='floatLeft'>
+                                        <span className='blod_sixHalf_five_black'>年龄: </span>
+                                        <span className='med_sixHalf_five_Black'>19</span>
+                                    </div>                                    
+                                </div>
+                                <div className='pd_userInfoItem clearfix'>
+                                    <div className='pd_userInfoItemColumn floatLeft'>
+                                        <span className='blod_sixHalf_five_black'>证件号码: </span>
+                                        <span className='med_sixHalf_five_Black'>254264115488454475</span>
+                                    </div>
+                                    <div className='pd_userInfoItemColumnSec floatLeft'>
+                                        <span className='blod_sixHalf_five_black'>社区: </span>
+                                        <span className='med_sixHalf_five_Black'>天河东路的日子</span>
+                                    </div>
+                                    <div className='floatLeft'>
+                                        <span className='blod_sixHalf_five_black'>联系方式: </span>
+                                        <span className='med_sixHalf_five_Black'>15932151478</span>
+                                    </div>                                    
+                                </div>
+                                <div className='pd_userInfoItem'>
+                                    <span className='blod_sixHalf_five_black'>病症分组: </span>
+                                    <span className='med_sixHalf_five_Black pd_diseaseType'>高血压</span>                                              
+                                    <span className='med_sixHalf_five_Black pd_diseaseType'>糖尿病</span>                                              
+                                    <span className='med_sixHalf_five_Black pd_diseaseType'>心脏病</span>                                              
+                                </div>
+                            </div>
+                            <div>
+                                <span className='pd_blueTitleMark'></span>
+                                <span className='regu_six_four_grey'>基本信息 </span>
+                                <span className='regu_six_four_Black'>当前已绑定手环（fdyhgfs) </span>
+                                <span className='regu_six_four_Black blue'> 解除绑定</span>
+                                <div className='floatRight'>
+                                    <img src={require('../../asset/img/refresh.png')} className='refreshIcon'></img>
+                                    <span className='regu_seven_four_grey'>刷新</span>
+                                </div>
+                                <div className='pd_tableContain'>
+                                    <Table columns={columns} dataSource={data} pagination={false} />
+                                </div>
+                                <div className='pd_exceptionContain'>
+                                    <div className='pd_dashDiv'></div>
+                                    <div className='pd_exceptionTitle regu_seven_four_Black'>异常统计信息</div>
+                                    <div className='pd_timeChoose'>
+                                        <Radio.Group defaultValue="1" buttonStyle="solid" onChange={(e)=>this.changeNoticeType(e)}>
+                                            <Radio.Button value="1">全部</Radio.Button>
+                                            <Radio.Button value="2">本周</Radio.Button>
+                                            <Radio.Button value="3">本月</Radio.Button>
+                                        </Radio.Group>
+                                        <span className='pd_rangeSpan'>
+                                            <RangePicker format="yyyy/MM/dds" />
+                                        </span>     
+                                    </div>
+                                    <div className='pd_infoItem'>
+                                        <div className='pd_leftTable floatLeft'>
+                                            <div className='pd_leftTableHeader'>
+                                                <div className='regu_sixHalf_four_grey'>血压异常统计</div>
+                                                <div className='bold_seventeen_bold_blue'>142</div>
+                                                <div className='regu_sixHalf_four_grey'>总预警次数</div>
+                                            </div>
+
+                                        </div>
+                                        <div className='pd_rightTable floatLeft'>
+                                            <div className='pd_rightTableTitle regu_sixHalf_four_grey clearfix'>
+                                                <span>详细异常列表</span>
+                                                <div className='floatRight pd_tabDiv'>
+                                                    <span className={this.state.bloodStatus==1?'pd_chooseItem pd_choosed':'pd_chooseItem' } onClick={()=>this.setState({
+                                                        bloodStatus: 1
+                                                    })}>全部状态</span>
+                                                    <span className={this.state.bloodStatus==2?'pd_chooseItem pd_choosed':'pd_chooseItem' } onClick={()=>this.setState({
+                                                        bloodStatus: 2
+                                                    })}>仅未处理</span>
+                                                </div>                                            
+                                            </div>
+                                            <div className='pd_tableItem'>
+                                                <div className='pd_tableItemContain taho_sixHalf_four_grey clearfix'>
+                                                    <span>2019/01/01 10:40</span>
+                                                    <span className='blue pd_centerMarg'>125/95 mmHg</span>
+                                                    <span className='floatRight'>已处理1</span>
+                                                </div>
+                                            </div>
+                                            <div className='pd_tableItem'>
+                                                <div className='pd_tableItemContain taho_sixHalf_four_grey clearfix'>
+                                                    <span>2019/01/01 10:40</span>
+                                                    <span className='blue pd_centerMarg'>125/95 mmHg</span>
+                                                    <span className='floatRight'>已处理</span>
+                                                </div>
+                                            </div>
+                                            <div className='pd_tableItem'>
+                                                <div className='pd_tableItemContain taho_sixHalf_four_grey clearfix'>
+                                                    <span>2019/01/01 10:40</span>
+                                                    <span className='blue pd_centerMarg'>125/95 mmHg</span>
+                                                    <span className='floatRight'>已处理</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {/*右边备注信息*/}
+                        <div className='pd_rightCotain floatLeft'>
+                            <div className='pd_remarkInfo'>
+                                <div className='regu_seven_four_Black pd_remarkInfoTitle'>备注信息</div>
+                                <div className='regu_sixHalf_four_grey'>
+                                    备注信息内容
+                                </div>
+                            </div>
+                            <div className='pd_upload'>
+                                <div className='med_seven_five_Black'>
+                                    附件信息
+                                </div>
+                                <div className='upaloadArea'>
+                                    <Dragger {...props}>
+                                        <img src={require('../../asset/img/uploadIcon.png')} className='uploadIcon'></img>
+                                        <div className='uploadMargin'><span className='med_seven_five_Black '>点击上传附件</span></div>
+                                        <span className='regu_six_four_grey'>附件格式支持.jpg .pdf word excel</span>
+                                    </Dragger>
+                                </div>
+                                <div className='fileItem clearfix'>
+                                    <span className='med_six_five_Black floatLeft'>患者病历.pdf</span>
+                                    <span className='med_six_five_Black floatRight' style={{color:'#0295D2'}}>删除</span>
+                                </div>
+                                <div className='fileItem clearfix'>
+                                    <span className='med_six_five_Black floatLeft'>患者病历.pdf</span>
+                                    <span className='med_six_five_Black floatRight' style={{color:'rgba(134,138,144,1)'}}>上传中(65%)</span>
+                                </div>
+                                <div className='pd_uploadBottom regu_six_four_grey'>
+                                    <span className='floatLeft'>共 <span>20M</span>容量</span>
+                                    <span className='floatRight'>剩余<span>19M</span>/已使用<span>1M</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>:'' 
+                }
                 {/* 随访信息页面 */}
                { this.state.key==2? <div className='pd_followUpContain clearfix'>
                     <div className='pd_followShotMsg floatLeft'>

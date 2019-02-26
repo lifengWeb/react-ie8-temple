@@ -30,3 +30,4 @@ require('antd/dist/antd.css');
 require('./src/router');
 require('./src/asset/css/common.css');
 require('./src/asset/css/font.css');
+require('./src/asset/css/color.css');

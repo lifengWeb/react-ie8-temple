@@ -1,4 +1,10 @@
 /*字体_字体大小_加粗_颜色*/
+.bold_seventeen_bold_blue{
+    font-size:1.7rem;
+    font-family:Tahoma-Bold;
+    font-weight:bold;
+    color:rgba(81,139,235,1);
+}
 /*灰色 */
 .med_six_five_grey{
     font-size:0.6rem;
@@ -49,6 +55,12 @@
     font-weight:bold;
     color:rgba(134,138,144,1)
 }
+.taho_sixHalf_four_grey{
+    font-size:0.65rem;
+    font-family:Tahoma;
+    font-weight:400;
+    color:rgba(134,138,144,1);
+}
 /*黑色*/
 .taho_fifteen_bold_black{
     font-size:1.52rem;
@@ -96,6 +108,18 @@
     font-size:0.6rem;
     font-family:PingFang-SC-Medium;
     font-weight:500;
+    color:rgba(47,49,54,1);
+}
+.regu_six_four_Black{
+    font-size:0.6rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
+    color:rgba(47,49,54,1);
+}
+.regu_seven_four_Black{
+    font-size:0.7rem;
+    font-family:PingFang-SC-Regular;
+    font-weight:400;
     color:rgba(47,49,54,1);
 }
 .reg_ten_four_Black{

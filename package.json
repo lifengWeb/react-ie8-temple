@@ -17,7 +17,7 @@
     "antd": "^1.11.6",
     "console-polyfill": "^0.2.2",
     "core-js": "^2.0.2",
-    "echarts": "^4.1.0",
+    "echarts": "^2.0",
     "es5-shim": "^4.4.1",
     "es6-promise": "^3.0.2",
     "fetch-ie8": "^1.4.0",
@@ -59,7 +59,5 @@
         }
       ]
     ]
-
-
   }
 }

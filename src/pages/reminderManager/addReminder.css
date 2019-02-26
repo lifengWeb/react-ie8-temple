@@ -50,7 +50,12 @@
     margin-bottom: 1.5rem;
 }
 hr{
-    background:rgba(222,225,226,1);
+    /* border-color:rgba(209,209,209,1); */
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: rgb(209, 209, 209);
+    border-left-color: transparent;
+    border-width: 1px;
     margin-bottom: 1.5rem;
 }
 .ar_customHeart{

@@ -129,3 +129,191 @@
 .pd_followUpTableContain{
     margin-top: 2rem;
 }
+/* 患者信息 */
+.patientInfoContain{
+    width: 60rem;
+    margin: 0.5rem auto 0 ;
+}
+.pd_LeftContain{
+    width:42.95rem;
+    height:47.4rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    padding: 0 2rem;
+    margin-right: 0.5rem;
+    box-sizing: border-box;
+}
+.pd_title{
+    margin: 1.5rem auto 0.5rem;
+    text-align: center;
+}
+.pd_lastTime{
+    border-bottom: 1px solid rgba(209,209,209,1);
+    width: 38.95rem;
+    height: 1rem;
+    text-align: right;
+    margin-bottom: 0.5rem;
+}
+.pd_basicInfo{
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(209,209,209,1);
+    margin-bottom: 0.5rem;
+}
+.pd_blueTitleMark{
+    display: inline-block;
+    width:0.2rem;
+    height:0.6rem;
+    background:rgba(3,211,216,1);
+    margin-right: 0.5rem;
+}
+.pd_userInfoItem{
+    margin: 1rem 0 0 2rem;
+}
+.pd_userInfoItemColumn{
+    width: 16rem;
+}
+.pd_userInfoItemColumnSec{
+    width: 12rem;
+}
+.pd_diseaseType{
+    width:2.95rem;
+    height:1.3rem;
+    background:rgba(241,241,241,1);
+    border:1px solid rgba(209,209,209,1);
+    border-radius:2px;
+    display: inline-block;
+    margin-left: 0.5rem;
+    text-align: center;
+    line-height: 1.3rem;
+}
+.pd_tableContain{
+    margin: 0.5rem 0;
+}
+
+/* 右侧备注信息 */
+.pd_remarkInfo{
+    width:16.1rem;
+    height:10.57rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    padding: 0.5rem;
+}
+.pd_remarkInfoTitle{
+    margin-bottom: 0.5rem;
+}
+.pd_upload{
+    width:16.05rem;
+    height:14.85rem;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(222, 225, 226, 1);
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    position: relative;
+}
+.pd_uploadBottom{
+    width:16.05rem;
+    height:1.4rem;
+    background:rgba(241,242,244,1);
+    position: absolute;
+    line-height: 1.4rem;
+    bottom: 0;
+    left: 0;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+.pd_exceptionContain{
+    position: relative;
+    padding-top:0.5rem; 
+}
+.pd_dashDiv{
+    border-bottom: 1px dashed rgba(209,209,209,1);
+    margin: 0.5rem 0 1rem 0;
+}
+.pd_exceptionTitle{
+    position: absolute;
+    left: 16rem;
+    top:0;
+    /* width:6.25rem; */
+    height: 2rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+    background: #fff;
+}
+.pd_timeChoose{
+    text-align: center;
+}
+.pd_rangeSpan{
+    display: inline-block;
+    width:9.1rem;
+    height:1.6rem;
+    margin-left: 0.5rem;
+}
+.pd_infoItem{
+    width:37.9rem;
+    height:14.25rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    box-shadow:0rem 0rem 0rem 0rem rgba(0, 0, 0, 0.1);
+    border-radius:0rem;
+}
+.pd_leftTable{
+    width:18rem;
+    height:14.25rem;
+    border-right: 1px solid rgba(209,209,209,1)
+}
+.pd_rightTable{
+    height: 14.25rem;
+    width: 19.8rem;
+}
+.pd_tabDiv{
+    height: 2rem;
+    box-sizing: border-box;
+}
+.pd_rightTableTitle{
+    height: 2rem;
+    line-height: 2rem;
+    padding: 0 1rem;
+    border-bottom: 1px solid rgba(209,209,209,1);
+    box-sizing: border-box;
+}
+.pd_choosed{
+    height: 2rem;
+    box-sizing: border-box;
+    display: inline-block;
+    color: #03D3D8;
+    border: none;
+    border-top: 1px solid rgba(209,209,209,1);
+    border-bottom: 3px solid #03D3D8;
+    background: #fff;
+}
+.pd_chooseItem{
+    margin-left: 1rem;
+}
+.pd_tableItem{
+    width:19.8rem;
+    height:2.3rem;
+    padding: 0 1rem;
+}
+.pd_tableItemContain{
+    height:2.3rem;
+    border-bottom: 1px solid rgba(209,209,209,1);
+    box-sizing: border-box;
+    line-height: 2.3rem;
+}
+.pd_centerMarg{
+    margin-left: 1rem;
+}
+.pd_tableItemChoosed{
+    border-left: 3px solid #03D3D8;
+    background: #F6F8FC;
+}
+.pd_leftTableHeader{
+    width: 15rem;
+    height: 5rem;
+    border-bottom: 1px solid rgba(209,209,209,1);
+    margin: 0 auto;
+}
+.pd_leftTableHeader div{
+    text-align: center;
+    margin-top: 0.5rem;
+}

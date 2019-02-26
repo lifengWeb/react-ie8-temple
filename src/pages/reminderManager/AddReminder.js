@@ -156,7 +156,8 @@ class AddReminder extends Component {
                         </Radio.Group>
                         <div className='med_sixHalf_five_Black ar_reminderType'>自定义规则名称</div>
                         <input type="text" className='ar_Input regu_sixHalf_four_grey' placeholder='填写规则名称'/>     
-                        <hr/>         
+                        <hr/>      
+                        {/*手环检测异常 */}   
                        {this.state.noticeType == 1?
                         <div>
                             <div className='ar_exceptionType blod_sixHalf_five_black'>异常触发类型</div>    
@@ -195,6 +196,7 @@ class AddReminder extends Component {
                             <div className='blod_sixHalf_five_black ar_setHeartTiltle'>提醒内容：</div>
                             <textarea className='ar_textArea' placeholder='填写提醒触发后发送给患者的内容'></textarea>
                         </div>  :""}
+                        {/*服药通知 */}
                         {this.state.noticeType == 2?
                             <div>                       
                                 <div className='ar_exceptionType blod_sixHalf_five_black'>设置发送时间</div>    
@@ -208,12 +210,14 @@ class AddReminder extends Component {
                                 <div className='blod_sixHalf_five_black ar_setHeartTiltle'>提醒内容：</div>
                                 <textarea className='ar_textArea ar_followUpTtextArea' placeholder='填写提醒触发后发送给患者的内容'></textarea>
                             </div>  :""}
+                        {/*随访通知 */}
                         {this.state.noticeType == 3?
                             <div>                              
                                 <div className='blod_sixHalf_five_black ar_setHeartTiltle'>提醒内容：</div>
                                 <textarea className='ar_textArea ar_followUpTtextArea' placeholder='填写提醒触发后发送给患者的内容'></textarea>
                             </div>  :""}
                     </div>
+                    {/*已选中患者列表 */}
                     <div className="ar_rightPatient floatLeft">
                         <div className='ar_patientChoosedTit'>
                             <span className='med_seven_five_grey'>已选患者</span>
@@ -235,6 +239,7 @@ class AddReminder extends Component {
                             </div>
                         </div>
                     </div>
+                    {/*患者选择弹窗 */}
                     {
                         this.state.showCover?
                         <div className='coverView' onClick={()=>this.setState({

@@ -317,7 +317,7 @@ class FollowUpManager extends Component{
                                         </div>
                                     </div>
                                 </div>
-                                {/* 第二部操作弹窗 */}
+                                {/* 第二步操作弹窗 */}
                                 <div className={this.state.showTwoStep?'groupCover fup_choosePatientCover':'hide'} onClick={(e)=>{
                                     e.stopPropagation()
                                 }}>
