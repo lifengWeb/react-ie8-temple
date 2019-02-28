@@ -7,7 +7,10 @@ const ReactDOM = require('react-dom');
 const Header = require('./component/Layout/Header/Header');
 const Sider = require('./component/Layout/Menu/Menu'); 
 
+
 //页面
+const Login = require('./pages/login/Login');
+
 const DataStatistics = require('./pages/dataStatistics/DataStatistics');
 const DiseaseManager = require('./pages/diseaseManager/DiseaseManager');
 // 随访管理
@@ -59,30 +62,44 @@ const App = React.createClass({
     )
   }
 })
+const Roots = React.createClass({
+  render() {
+    return (
+            <div style={{height:'100%',width:'100%'}}>
+               {this.props.children}   
+            </div>
+    )
+  }
+})
 
 //不能用React.render
 ReactDOM.render((
   <Router history={browserHistory} routes={
-    <Route path="/" component={App}>
-      <IndexRoute component={DataStatistics}/>
-      <Route path='dataStatistics' component={DataStatistics}/>
-      <Route path='diseaseManager' component={DiseaseManager}/>
-      {/* 随访管理 */}
-      <Route path='followUpManager' component={FollowUpManager}/>      
-      <Route path='followUpManager/followUpDetail' component={FollowUpDetail}/>      
-      <Route path='followUpManager/enterFollowUpInfo' component={EnterFollowUpInfo}/>      
-      {/* 患者管理 */}
-      <Route path='patientManager' component={PatientManager}/>
-      <Route path='patientManager/addPatient' component={AddPatient}/>
-      <Route path='patientManager/PatientDetail' component={PatientDetail}/>
-     {/* 提醒管理*/}
-      <Route path='reminderManager' component={ReminderManager}/>
-      <Route path='reminderManager/addReminder' component={AddReminder}/>
-      <Route path='reminderManager/usingReminder' component={UsingReminder}/>
+    <Route>
+      <Route path="/" component={Roots}>       
+        <IndexRoute component={Login}/>
+        <Route path="login" component={Login} />
+      </Route>
+      <Route path="/" component={App}>   
+        <Route path='login' component={Login}></Route>
+        <Route path='dataStatistics' component={DataStatistics}/>
+        <Route path='diseaseManager' component={DiseaseManager}/>
+        {/* 随访管理 */}
+        <Route path='followUpManager' component={FollowUpManager}/>      
+        <Route path='followUpManager/followUpDetail' component={FollowUpDetail}/>      
+        <Route path='followUpManager/enterFollowUpInfo' component={EnterFollowUpInfo}/>      
+        {/* 患者管理 */}
+        <Route path='patientManager' component={PatientManager}/>
+        <Route path='patientManager/addPatient' component={AddPatient}/>
+        <Route path='patientManager/PatientDetail' component={PatientDetail}/>
+      {/* 提醒管理*/}
+        <Route path='reminderManager' component={ReminderManager}/>
+        <Route path='reminderManager/addReminder' component={AddReminder}/>
+        <Route path='reminderManager/usingReminder' component={UsingReminder}/>
 
-      <Route path='adminManager' component={AdminManager}/>
-      <Route path='communityManager' component={CommunityManager}/>
-    </Route>
-  }>    
+        <Route path='adminManager' component={AdminManager}/>
+        <Route path='communityManager' component={CommunityManager}/>
+      </Route>
+    </Route>}>    
   </Router>
 ), document.getElementById('app'))

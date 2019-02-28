@@ -208,3 +208,6 @@ img {
     background:rgba(3,211,216,1);
     color: #fff;
 }
+.marginSpan{
+    margin-right: 0.5rem
+}

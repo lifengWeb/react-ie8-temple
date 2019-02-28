@@ -8,6 +8,60 @@ const Pagination = require('antd/lib/pagination');
 const Radio = require('antd/lib/radio');
 const DatePicker = require('antd/lib/date-picker');
 const RangePicker = DatePicker.RangePicker;
+
+const echarts = require('echarts');
+require('echarts/chart/line');
+const option = {
+    // calculable : true,
+    grid:{
+        x:40,
+        y:20,
+        x2:20,
+        y2:20,
+        borderWidth:0,
+        // width:300
+    },
+    color:['#518BEB'],
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : ['12','13','14','15','16','17','18','19','20'],
+            axisLine:{
+                show:false
+            },
+            axisTick:{
+                show:false
+            },
+             "splitLine": {     //网格线
+                "show": false
+              },
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            axisLine:{
+                show:false
+            },
+            axisTick:{
+                show:false
+            },
+            // show:false
+        }
+    ],
+    series : [
+        {
+            name:'次数',
+            type:'line',
+            stack: '总量',
+            data:[12, 13, 11, 34, 90, 20, 10,19,37]
+        }
+    ]
+};
+                    
+
+
 function callback(key) {
   console.log(key);
 }
@@ -65,6 +119,10 @@ class PatientDetail extends Component {
         console.log(key);
         this.setState({key:key})
     }
+    componentDidMount(){
+        let echartBlood =echarts.init(document.getElementById('echartBlood'));
+        echartBlood.setOption(option);
+    }
     
     render(){
         return(
@@ -73,14 +131,17 @@ class PatientDetail extends Component {
                 <div className='nav clearfix'>                
                     <span className='med_seven_five_grey'>患者管理 > 详情</span>
                     <div className='floatRight TabsContain med_seven_five_grey'>
-                        <Tabs defaultActiveKey="1" onChange={(e)=>this.changeTab(e)} size="small">
-                            <TabPane tab="患者信息" key="1">
-                            </TabPane>
-                            <TabPane tab="随访信息" key="2">
-                            </TabPane>
-                            <TabPane tab="提醒" key="3">
-                            </TabPane>
-                        </Tabs>
+                        <div className='pd_tabDiv pd_titleTab'>
+                            <span className={this.state.key==1?'pd_chooseItem pd_choosed pd_titlechoosed':'pd_chooseItem' } onClick={()=>this.setState({
+                                key: 1
+                            })}>患者信息</span>
+                            <span className={this.state.key==2?'pd_chooseItem pd_choosed pd_titlechoosed':'pd_chooseItem' } onClick={()=>this.setState({
+                                key: 2
+                            })}>随访信息</span>
+                            <span className={this.state.key==3?'pd_chooseItem pd_choosed pd_titlechoosed':'pd_chooseItem' } onClick={()=>this.setState({
+                                key: 3
+                            })}>提醒</span>
+                        </div>     
                     </div>
                 </div>
                 {/* 患者信息页面 */}
@@ -161,6 +222,11 @@ class PatientDetail extends Component {
                                                 <div className='bold_seventeen_bold_blue'>142</div>
                                                 <div className='regu_sixHalf_four_grey'>总预警次数</div>
                                             </div>
+                                            <div className='pd_echartContain'>
+                                              <div id='echartBlood' className='pd_echart'>
+                                              </div>
+                                            </div>
+                                           
 
                                         </div>
                                         <div className='pd_rightTable floatLeft'>
@@ -240,7 +306,7 @@ class PatientDetail extends Component {
                 {/* 随访信息页面 */}
                { this.state.key==2? <div className='pd_followUpContain clearfix'>
                     <div className='pd_followShotMsg floatLeft'>
-                        <div className='pd_followShotMsgItem pd_choosed'>
+                        <div className='pd_followShotMsgItem pd_choosedMsg'>
                             <div className='blod_eight_five_black'>2019年1月1日</div>
                             <div className='med_sixHalf_five_grey pd_itemCenterMargin'>高血压随访记录表</div>
                             <div className='med_sixHalf_five_grey'>随访人员：<span>和医生</span></div>
@@ -430,7 +496,7 @@ class PatientDetail extends Component {
                                         </div>
                                     </div>                                   
                                 </div>                           
-                        </div>:''
+                        </div>
                     </div>                
                 :''}
             </div>

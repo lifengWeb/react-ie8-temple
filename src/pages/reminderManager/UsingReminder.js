@@ -6,7 +6,7 @@ class UsingReminder extends Component {
     constructor(props){
         super(props);
         this.state={
-
+            key:1
         }
     }
     handleChange(e){
@@ -18,23 +18,25 @@ class UsingReminder extends Component {
             <div>         
                 <div className='navTop'></div>       
                 <div className='nav'>                
-                    <span className='med_seven_five_grey'>提醒管理 > 运行中的提醒</span>
+                    <span className='med_seven_five_grey floatLeft'>提醒管理 > 运行中的提醒</span>
+                    <div className='floatLeft TabsContain med_seven_five_grey'>
+                    <div className='pd_tabDiv pd_titleTab ur_titleTab'>
+                        <span className={this.state.key==1?'pd_chooseItem pd_choosed pd_titlechoosed':'pd_chooseItem' } onClick={()=>this.setState({
+                            key: 1
+                        })}>心率异常提醒</span>
+                        <span className={this.state.key==2?'pd_chooseItem pd_choosed pd_titlechoosed':'pd_chooseItem' } onClick={()=>this.setState({
+                            key: 2
+                        })}>血压异常提醒</span>
+                        <span className={this.state.key==3?'pd_chooseItem pd_choosed pd_titlechoosed':'pd_chooseItem' } onClick={()=>this.setState({
+                            key: 3
+                        })}>温度异常提醒</span>
+                        <span className={this.state.key==4?'pd_chooseItem pd_choosed pd_titlechoosed':'pd_chooseItem' } onClick={()=>this.setState({
+                            key: 4
+                        })}>服药提醒</span>
+                    </div>     
+                </div>
                 </div>
                 <div className="ur_main">
-                    <div className='rm_chooseTme'>
-                        <span className='med_six_five_grey'>提醒时间：</span>
-                        <Select showSearch
-                            style={{ width: 200 }}
-                            placeholder="请选择提醒类型"
-                            optionFilterProp="children"
-                            notFoundContent="无法找到"
-                            onChange={()=>this.handleChange}
-                        >
-                            <Option value="jack">杰克</Option>
-                            <Option value="lucy">露西</Option>
-                            <Option value="tom">汤姆</Option>
-                        </Select>
-                    </div>
                     <div className='ur_reminderContain'>
                         <div className="ur_reminderItem">
                             <div className='ur_reminderItemTitle'>

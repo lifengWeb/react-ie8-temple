@@ -18,7 +18,8 @@ class AdminManager extends Component {
     constructor(props){
         super(props);
         this.state={
-          showCover:false
+          showCover:false,
+          type:1,    type:3,//弹窗的类型 1 - 添加; 2 - 编辑; 3 - 删除 ; 4 - 患者授权； 5 - 功能授权 
         }
     }
     
@@ -44,10 +45,10 @@ class AdminManager extends Component {
               key: 'operation',
               render: () => (
                 <span>
-                  <a href="#">编辑</a>
-                  <a href="#">患者授权</a>
-                  <a href="#">功能授权</a>
-                  <a href="#">删除</a>
+                  <a href="#" className='marginSpan'>编辑</a>
+                  <a href="#" className='marginSpan'>患者授权</a>
+                  <a href="#" className='marginSpan'>功能授权</a>
+                  <a href="#" className='marginSpan'>删除</a>
                   {/* <span className="ant-divider"></span> */}
                 </span>
               ),

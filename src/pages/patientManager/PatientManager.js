@@ -124,11 +124,13 @@ class PatientManager extends Component{
               key: 'operation',
               render: () => (
                 <span>
-                  <span onClick={
+                  <span 
+                  className='marginSpan'
+                  onClick={
                     ()=>this.props.history.push("patientManager/PatientDetail")
                   }> <a>详情</a></span>  
-                  <a href="#">编辑</a>
-                  <a href="#">删除</a>
+                  <a href="#" className='marginSpan'>编辑</a>
+                  <a href="#" className='marginSpan'>删除</a>
                   {/* <span className="ant-divider"></span> */}
                 </span>
               ),

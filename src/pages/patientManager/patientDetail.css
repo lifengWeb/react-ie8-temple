@@ -86,7 +86,7 @@
     padding: 1rem;
     border-bottom: 1px solid rgba(223,226,227,1);
 }
-.pd_choosed{
+.pd_choosedMsg{
     background: #F0F1F2;
     border:1px solid rgba(196,202,209,1);
 }
@@ -265,6 +265,12 @@
     height: 14.25rem;
     width: 19.8rem;
 }
+.pd_titleTab{
+    margin: 0 auto;
+}
+.pd_titleTab .pd_titlechoosed{
+    border-top: none;
+}
 .pd_tabDiv{
     height: 2rem;
     box-sizing: border-box;
@@ -316,4 +322,14 @@
 .pd_leftTableHeader div{
     text-align: center;
     margin-top: 0.5rem;
+}
+.pd_echart{
+    width:15rem;
+    height:9rem;
+}
+.pd_echartContain{
+  margin-left: 1rem
+}
+.pd_echartContain .zr-element{
+    width:15rem;
 }

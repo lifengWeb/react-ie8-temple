@@ -17,7 +17,8 @@ class CommunityManager extends Component {
     constructor(props){
         super(props);
         this.state={
-
+          showCover:false,
+          type:3,//弹窗的类型 1 - 添加; 2 - 编辑; 3 - 删除;
         }
     }
     
@@ -37,8 +38,14 @@ class CommunityManager extends Component {
               key: 'operation',
               render: () => (
                 <span>
-                  <a href="#">重命名</a>
-                  <a href="#">删除</a>
+                  <a href="#" className='marginSpan' onClick={()=>this.setState({
+                    showCover:true,
+                    type:2
+                  })}>重命名</a>
+                  <a href="#" className='marginSpan' onClick={()=>this.setState({
+                    showCover:true,
+                    type:3
+                  })}>删除</a>
                   {/* <span className="ant-divider"></span> */}
                 </span>
               ),
@@ -80,7 +87,10 @@ class CommunityManager extends Component {
                         <div className='addBtn floatLeft' onClick={()=>{
                             browserHistory.push('/patientManager/addPatient')
                         }}>
-                            <span className='med_seven_five_white'>添加</span>
+                            <span className='med_seven_five_white' onClick={()=>this.setState({
+                              showCover:true,
+                              type:1
+                            })}>添加</span>
                         </div>
                     </div>
                 </div>
@@ -88,30 +98,47 @@ class CommunityManager extends Component {
                 <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={false}/>              
                  {/* 分组操作弹窗部分 */}
                  {
-                    this.state.showCover?
-                    <div className='coverView' onClick={()=>this.setState({
-                        showCover:false
-                    })}>
+                  this.state.showCover?
+                  <div className='coverView' onClick={()=>this.setState({
+                      showCover:false
+                  })}>
+                          {this.state.type!=3?                              
                             <div className='groupCover dm_cover' onClick={(e)=>{
-                                e.stopPropagation()
-                            }}>
-                                <div className='coverTitle'>                                    
-                                    <span className='bold_elev_bold_grey '>添加新分组</span>
-                                    <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
-                                </div>
-                                <div>                                   
-                                    <input className='groupSelect med_sixHalf_five_grey' placeholder='输入新名称'/>
-                                </div>
-                                <div className='groupHandleBtm'>
-                                    <div className='floatRight'>
-                                            <div className='cancelBtn med_eight_five_grey floatLeft'>取消</div>
-                                            <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
-                                    </div>
+                              e.stopPropagation()
+                          }}>
+                              <div className='coverTitle'>                                    
+                                  <span className='bold_elev_bold_grey '>{this.state.type==1?'添加新社区':'重命名社区'}</span>
+                                  <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
+                              </div>
+                              <div>                                   
+                                  <input className='groupSelect med_sixHalf_five_grey' placeholder={this.state.type==1?'输入社区名称':'输入新名称'}/>
+                              </div>
+                              <div className='groupHandleBtm'>
+                                  <div className='floatRight'>
+                                          <div className='cancelBtn med_eight_five_grey floatLeft'>取消</div>
+                                          <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
+                                  </div>
+                              </div>
+                          </div>: <div className='groupCover dm_cover' onClick={(e)=>{
+                            e.stopPropagation()
+                        }}>
+                            <div className='coverTitle'>                                    
+                                <span className='bold_elev_bold_grey '>确认删除</span>
+                                <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
+                            </div>
+                            <div>                                   
+                                <span className='dm_deleteTips med_sixHalf_five_grey'>确认要删除该社区吗？</span>
+                            </div>
+                            <div className='groupHandleBtm'>
+                                <div className='floatRight'>
+                                        <div className='cancelBtn med_eight_five_grey floatLeft'>取消</div>
+                                        <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
                                 </div>
                             </div>
-                        
-                    </div>:''
-                }
+                        </div>}
+                      
+                  </div>:''
+              }
             </div>
         </div>
         )

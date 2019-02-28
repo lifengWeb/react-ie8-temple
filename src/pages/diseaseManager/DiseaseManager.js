@@ -18,7 +18,8 @@ class DiseaseManager extends Component {
     constructor(props){
         super(props);
         this.state={
-            showCover:false
+            showCover:false,
+            type:3,//弹窗的类型 1 添加 2 编辑 3 删除
         }
     }
     
@@ -38,8 +39,16 @@ class DiseaseManager extends Component {
               key: 'operation',
               render: () => (
                 <span>
-                  <a href="#">重命名</a>
-                  <a href="#">删除</a>
+                  <a 
+                  className='marginSpan'
+                  onClick={()=>this.setState({
+                    showCover:true,
+                    type:2,
+                  })}>重命名</a>
+                  <a onClick={()=>this.setState({
+                    showCover:true,
+                    type:3,
+                  })}>删除</a>
                   {/* <span className="ant-divider"></span> */}
                 </span>
               ),
@@ -95,15 +104,16 @@ class DiseaseManager extends Component {
                     <div className='coverView' onClick={()=>this.setState({
                         showCover:false
                     })}>
-                            <div className='groupCover dm_cover' onClick={(e)=>{
+                            {this.state.type!=3?                              
+                              <div className='groupCover dm_cover' onClick={(e)=>{
                                 e.stopPropagation()
                             }}>
                                 <div className='coverTitle'>                                    
-                                    <span className='bold_elev_bold_grey '>添加新分组</span>
+                                    <span className='bold_elev_bold_grey '>{this.state.type==1?'添加新分组':'重命名分组'}</span>
                                     <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
                                 </div>
                                 <div>                                   
-                                    <input className='groupSelect med_sixHalf_five_grey' placeholder='输入新名称'/>
+                                    <input className='groupSelect med_sixHalf_five_grey' placeholder={this.state.type==1?'输入分组名称':'输入新名称'}/>
                                 </div>
                                 <div className='groupHandleBtm'>
                                     <div className='floatRight'>
@@ -111,7 +121,23 @@ class DiseaseManager extends Component {
                                             <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>: <div className='groupCover dm_cover' onClick={(e)=>{
+                              e.stopPropagation()
+                          }}>
+                              <div className='coverTitle'>                                    
+                                  <span className='bold_elev_bold_grey '>确认删除</span>
+                                  <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
+                              </div>
+                              <div>                                   
+                                  <span className='dm_deleteTips med_sixHalf_five_grey'>执行删除后仅删除当前分组名，不会删除分组内的患者</span>
+                              </div>
+                              <div className='groupHandleBtm'>
+                                  <div className='floatRight'>
+                                          <div className='cancelBtn med_eight_five_grey floatLeft'>取消</div>
+                                          <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
+                                  </div>
+                              </div>
+                          </div>}
                         
                     </div>:''
                 }
