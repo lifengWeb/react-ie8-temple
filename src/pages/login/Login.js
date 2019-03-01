@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const message = require('antd/lib/message');
 import axios from 'axios';
 
 require('./login.css');
@@ -14,15 +15,29 @@ const Login = React.createClass({
     let password = document.getElementById('password').value;
     let checkRemeber = document.getElementById('checkRemeber').checked;
     console.log(username,checkRemeber,password);
-
+    //登陆请求 并保存cookie
     axios.post('/api/admin/login', {username:username,password:password})
-    .then(function (response) {
-      console.log(response);
+    .then((response)=> {
+      const data = response.data
+      if(data.code==200){     
+        let exp = new Date(); 
+        exp.setTime(exp.getTime() + data.data.expires_in*100); 
+        document.cookie = 'token' + "="+ escape ( data.data.token_type+data.data.access_token) + ";expires=" + exp.toGMTString(); 
+
+        this.props.history.push('/dataStatistics')
+        //如果选择记住我
+        if(checkRemeber){
+          document.cookie = 'username'+ "="+ escape (username) + ";expires=" + exp.toGMTString(); 
+          document.cookie = 'password'+ "="+ escape (password) + ";expires=" + exp.toGMTString(); 
+        }
+      }else{
+        message.error(data.msg);
+      }     
     })
     .catch(function (error) {
       console.log(error);
     });
-    this.props.history.push('/dataStatistics')
+    
   },
   componentDidMount(){
   },

@@ -20,11 +20,13 @@
 /*表格数据样式*/
 .tabContain{
     width:80rem;
-    height:37.8rem;
+    height:30.8rem;
     background:rgba(255,255,255,1);
     border:0.05px solid rgba(222, 225, 226, 1);
     box-shadow:0rem 0rem 0rem 0rem rgba(0, 0, 0, 0.1);
     border-radius:2px;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
 }
 .handleContain{
     height: 3rem;
@@ -163,6 +165,15 @@
     margin: 0 2rem 0 2rem;
 }
 
+.pd_patientList{
+    width:80rem;
+    height:20rem;
+    background:rgba(255,255,255,1);
+    border:0.05px solid rgba(222, 225, 226, 1);
+    box-shadow:0rem 0rem 0rem 0rem rgba(0, 0, 0, 0.1);
+    border-radius:0rem;
+    box-sizing: border-box;
+}
 
 
 
@@ -177,12 +188,17 @@
     border-bottom: 1px solid #F0F1F2;   
 }
 
-.tabContain .ant-table-body table,.tabContain .ant-table ,.tabContain .ant-table-large,.tabContain .ant-table-scroll-position-left{
+/* .tabContain .ant-table-body table,.tabContain .ant-table ,.tabContain .ant-table-large,.tabContain .ant-table-scroll-position-left{
     overflow-y: scroll;
-}
+} */
 .tabContain .ant-table-row{
     height: 2.75rem;
 }
 .tabContain .ant-table-thead > tr > td{
     height: 2.75rem;
+}
+
+.ant-table-content .ant-table-body{
+    height:28rem;
+    overflow-y: scroll;
 }

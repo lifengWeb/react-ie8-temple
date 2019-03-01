@@ -1,8 +1,9 @@
 //病人管理
 import React ,{Component} from 'react';
-// import {  Link } from 'react-router';
 import { browserHistory } from 'react-router';
 require('./patientManager.css');
+const getAxios = require('../../utils/axiosInstance');
+
 
 const Breadcrumb = require('antd/lib/breadcrumb');
 const Radio = require('antd/lib/radio');
@@ -43,38 +44,59 @@ class PatientManager extends Component{
         this.state={
             showItem:-1, //显示哪个提醒服务弹窗
             showCover:false,//是否显示操作分组的弹窗
+            patientList:[],
+            pageNow:1
         }
+    }
+    componentDidMount(){
+        //获取患者列表
+        getAxios('/api/v1/patient','get',{},(res)=>{
+            console.log(res.data)
+            this.setState({
+                patientList:res.data
+            })
+        })
     }
     render(){
         const columns = [{
             title: '姓名',
             dataIndex: 'name',
+            width: 150,
             render: text => <a href="#">{text}</a>,
           }, {
             title: '性别',
-            dataIndex: 'sex',
+            width: 150,
+            dataIndex: 'gender',
           }, {
             title: '社区',
-            dataIndex: 'address',
+            width: 150,
+            dataIndex: 'community_name',
           },{
               title: '年龄',
+              width: 150,
               dataIndex: 'age',
             }, {
               title: '证件号码',
-              dataIndex: 'age1',
+              dataIndex: 'idcard_number',
+              width: 150,
             }, {
               title: '联系方式',
-              dataIndex: 'age2',
+              dataIndex: 'phone',
+              width: 150,
             },{
               title: '分组',
-              dataIndex: 'age3',
+              dataIndex: 'disease_name',
+              width: 150,
             }, {
               title: '当前警报状态',
               dataIndex: 'age4',
+              width: 150,
             }, {
               title: '已设置提醒',
               dataIndex: 'age5',
+              width: 150,
               render: (text,record) => {
+                  console.log(record);
                   const {showItem} = this.state;
                 return(
                     <div style={{position:'relative'}}
@@ -82,17 +104,17 @@ class PatientManager extends Component{
                                 this.setState({showItem:-1})
                             }}
                             onMouseOver={(e)=>{
-                                this.setState({showItem:record.key})
+                                this.setState({showItem:record.id})
                             }} className='patiManagerTips'>
                             <span
-                                style={showItem==record.key?{color:'#03D3D8'}:{}}
+                                style={showItem==record.id?{color:'#03D3D8'}:{}}
                             >
                                 {text}
-                                <img className='tipsIcon'src={showItem==record.key?require('../../asset/img/icon2.png'):require('../../asset/img/icon.png')}></img>
+                                <img className='tipsIcon'src={showItem==record.id?require('../../asset/img/icon2.png'):require('../../asset/img/icon.png')}></img>
                             
                             </span>
                             {
-                                    showItem==record.key?
+                                    showItem==record.id?
                                     <div className='tipsContain'>
                                         <div className='tipsTitle clearfix'>
                                             <span className='med_six_five_grey floatLeft'>已设提醒服务 2条</span>
@@ -135,28 +157,7 @@ class PatientManager extends Component{
                 </span>
               ),
             }];
-          const data = [{
-            key: '1',
-            name: '胡彦斌',
-            sex:'男',
-            age: 32,
-            age1: 32,
-            age2: 32,
-            age3: 32,
-            age4: 32,
-            age5: 32,
-            address: '西湖区湖底公园1号',
-          }, {
-            key: '2',
-            name: '胡彦祖',
-            age: 42,
-            address: '西湖区湖底公园1号',
-          }, {
-            key: '3',
-            name: '李大嘴',
-            age: 32,
-            address: '西湖区湖底公园1号',
-          }];
+          const data = this.state.patientList;
         return(
              <div>         
                 <div className='navTop'></div>           
@@ -254,7 +255,10 @@ class PatientManager extends Component{
                         </div>
                     </div>
                     {/* 列表数据渲染 */}
-                    <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={false}/>
+                    <div className='pd_patientList'>
+                        <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={false} useFixedHeader={true} />
+                    </div>
+                   
                     {/* 分组操作弹窗部分 */}
                     {
                         this.state.showCover?
@@ -296,9 +300,6 @@ class PatientManager extends Component{
                 </div>
             </div>
         )
-    }
-    componentDidMount(){
-      
     }
 }
 module.exports = PatientManager;

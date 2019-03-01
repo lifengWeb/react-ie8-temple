@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const Table = require('antd/lib/table');
 require('./adminManager.css');
+const getAxios = require('../../utils/axiosInstance');
 // 通过 rowSelection 对象表明需要行选择
 const rowSelection = {
     onChange(selectedRowKeys, selectedRows) {
@@ -19,27 +20,36 @@ class AdminManager extends Component {
         super(props);
         this.state={
           showCover:false,
-          type:1,    type:3,//弹窗的类型 1 - 添加; 2 - 编辑; 3 - 删除 ; 4 - 患者授权； 5 - 功能授权 
+          type:3,//弹窗的类型 1 - 添加; 2 - 编辑; 3 - 删除 ; 4 - 患者授权； 5 - 功能授权 
+          adminList:[],
         }
     }
-    
+    componentDidMount(){
+      //获取管理员列表
+        getAxios('/api/v1/admin','get',{},(res)=>{
+          console.log(res.data)
+          this.setState({
+              adminList:res.data
+          })
+      })
+    }
     render(){
         const columns = [{
             title: '编号',
-            dataIndex: 'name',
+            dataIndex: 'id',
             render: text => <a href="#">{text}</a>,
           }, {
             title: '头像',
             dataIndex: 'sex',
           }, {
             title: '社区',
-            dataIndex: 'address',
+            dataIndex: 'hospital[name]',
           }, {
             title: '添加时间',
-            dataIndex: 'sex1',
+            dataIndex: 'created_at',
           }, {
             title: '类型',
-            dataIndex: 'address1',
+            dataIndex: 'role_id',
           },{
               title: '操作',
               key: 'operation',
