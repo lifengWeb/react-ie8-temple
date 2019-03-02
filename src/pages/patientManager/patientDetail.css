@@ -333,3 +333,7 @@
 .pd_echartContain .zr-element{
     width:15rem;
 }
+.pd_tableContain .ant-table-content .ant-table-body{
+    height:10rem;
+    overflow-y: scroll;
+}
