@@ -25,12 +25,37 @@ class AdminManager extends Component {
         }
     }
     componentDidMount(){
-      //获取管理员列表
-        getAxios('/api/v1/admin','get',{},(res)=>{
-          console.log(res.data)
-          this.setState({
-              adminList:res.data
-          })
+      this.getAdminList();
+    }
+    getAdminList(){
+       //获取管理员列表
+       getAxios('/api/v1/admin','get',{},(res)=>{
+        console.log(res.data)
+        this.setState({
+            adminList:res.data
+        })
+    })
+    }
+    //添加管理员
+    addAdmin(){
+      const {username,name,password} = this.state;
+      getAxios('/api/v1/admin','post',{
+        username:username,
+        truename:name,
+        password:password,
+        //下面3数据写死的需要修改
+        role_id:1,
+        phone:'13825241447',
+        hospital_id:1,
+      },(res)=>{
+        console.log(res);    
+        this.hideCover();
+        this.getAdminList();  
+      })
+    }
+    hideCover(){
+      this.setState({
+        showCover:false
       })
     }
     render(){
@@ -50,6 +75,7 @@ class AdminManager extends Component {
           }, {
             title: '类型',
             dataIndex: 'role_id',
+            render: role_id => <text>{role_id==3?'医生':(role_id==2?'医院':'超级管理员')}</text>,
           },{
               title: '操作',
               key: 'operation',
@@ -63,23 +89,7 @@ class AdminManager extends Component {
                 </span>
               ),
             }];
-          const data = [{
-            name: '胡彦斌',
-            sex:'男',
-            address: '西湖区湖底公园1号',
-            sex1:'男',
-            address1: '西湖区湖底公园1号',
-          }, {
-            key: '2',
-            name: '胡彦祖',
-            age: 42,
-            address: '西湖区湖底公园1号',
-          }, {
-            key: '3',
-            name: '李大嘴',
-            age: 32,
-            address: '西湖区湖底公园1号',
-          }];
+          const data = this.state.adminList;
         return(
             <div>       
                 <div className='navTop'></div>         
@@ -127,24 +137,54 @@ class AdminManager extends Component {
                                 </div>
                                 <div className='am_adminCoverContain'>   
                                     <div className='am_headImg'></div>
-                                    <input className='am_inputItem med_sixHalf_five_grey' placeholder='输入新名称'/>
-                                    <input className='am_inputItem med_sixHalf_five_grey' placeholder='输入新名称'/>
-                                    <input className='am_inputItem med_sixHalf_five_grey' placeholder='输入新名称'/>
+                                    <input 
+                                      className='am_inputItem med_sixHalf_five_grey' 
+                                      placeholder='输入姓名'
+                                      value={this.state.name}
+                                      onChange={(e)=>{
+                                        this.setState({
+                                          name:e.target.value
+                                        })
+                                      }}/>
+                                    <input 
+                                      className='am_inputItem med_sixHalf_five_grey'
+                                      placeholder='输入账户名'                                      
+                                      value={this.state.username}
+                                      onChange={(e)=>{
+                                        this.setState({
+                                          username:e.target.value
+                                        })
+                                      }}/>
+                                    <input 
+                                      className='am_inputItem med_sixHalf_five_grey'
+                                      placeholder='输入密码'
+                                      type='psassword'
+                                      value={this.state.password}
+                                      onChange={(e)=>{
+                                        this.setState({
+                                          password:e.target.value
+                                        })
+                                      }}
+                                    />
                                     <select placeholder='请选择社区' className='am_inputItem med_sixHalf_five_grey'>
                                       <option>社区一</option>
                                       <option>社区2</option>
-                                      <option>社区一</option>
+                                      <option>社区3</option>
                                     </select>
                                 </div>
                                 <div className='groupHandleBtm'>
                                     <div className='floatRight'>
-                                            <div className='cancelBtn med_eight_five_grey floatLeft'>取消</div>
-                                            <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
+                                            <div className='cancelBtn med_eight_five_grey floatLeft' onClick={()=>this.hideCover()}>取消</div>
+                                            <div className='confirmBtn med_eight_five_white floatRight' onClick={()=>this.addAdmin()}>确认</div>
                                     </div>
                                 </div>
                             </div>
                         
                     </div>:''
+                }
+                {/*患者授权弹窗*/}
+                {
+
                 }
             </div>
         </div>

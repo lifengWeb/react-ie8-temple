@@ -5,7 +5,6 @@ function getAxios(url,method,data,success,fail){
   //获取token
   let arr,token,reg=new RegExp("(^| )"+'token'+"=([^;]*)(;|$)");
   if(arr=document.cookie.match(reg)){
-    console.log(document.cookie);
      token = unescape(arr[2])
    }
 
@@ -13,8 +12,6 @@ function getAxios(url,method,data,success,fail){
   let axiosInstance = axios.create();
   axiosInstance.defaults.withCredentials = true;
   axiosInstance.defaults.timeout = 10000;
-  // axiosInstance.defaults.headers ={Authorization:token}
-  console.log(token,'token')
   if(!token){
     window.location.href='/login';
   }
@@ -37,6 +34,41 @@ function getAxios(url,method,data,success,fail){
     });
   }else if(method=='get'){
     axiosInstance.get(url,{
+      headers:{
+        Authorization:token
+      }
+    })
+    .then((response)=> {
+      if(response.data.code==200){     
+        success&&success(response.data);       
+      }else{
+        fail&&fail(response.data);
+        // message.error(data.msg);
+      }     
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }else if(method=='patch'){
+    axiosInstance.patch(url,data,{
+      headers:{
+        Authorization:token
+      }
+    })
+    .then((response)=> {
+      if(response.data.code==200){     
+        success&&success(response.data);       
+      }else{
+        fail&&fail(response.data);
+        // message.error(data.msg);
+      }     
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  else if(method=='delete'){
+    axiosInstance.delete(url,{
       headers:{
         Authorization:token
       }

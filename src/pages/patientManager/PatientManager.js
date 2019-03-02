@@ -61,11 +61,11 @@ class PatientManager extends Component{
         const columns = [{
             title: '姓名',
             dataIndex: 'name',
-            width: 150,
+            width: 50,
             render: text => <a href="#">{text}</a>,
           }, {
             title: '性别',
-            width: 150,
+            width: 50,
             dataIndex: 'gender',
           }, {
             title: '社区',
@@ -73,7 +73,7 @@ class PatientManager extends Component{
             dataIndex: 'community_name',
           },{
               title: '年龄',
-              width: 150,
+              width: 50,
               dataIndex: 'age',
             }, {
               title: '证件号码',
