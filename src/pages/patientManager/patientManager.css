@@ -128,6 +128,11 @@
     width: 100%;
     box-sizing: border-box;
 }
+.pm_groupDisease{
+    height: 10rem;
+    overflow-y: scroll;
+}
+
 .groupSelect{
     width:36.5rem;
     height:1.7rem;

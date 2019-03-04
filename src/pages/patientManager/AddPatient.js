@@ -1,46 +1,174 @@
 import React, { Component } from 'react';
 require('./addPatient.css');
-
+const message = require('antd/lib/message');
+const getAxios = require('../../utils/axiosInstance');
 const Radio = require('antd/lib/radio');
 const Checkbox = require('antd/lib/checkbox');
 
 const Upload = require('antd/lib/upload');
 const Dragger = Upload.Dragger;
 const CheckboxGroup = Checkbox.Group;
-const options = [
-    { label: '苹果', value: 'Apple' },
-    { label: '梨', value: 'Pear' },
-    { label: '橘', value: 'Orange' },
-  ];
+
+const Select = require('antd/lib/select');
+const Option = Select.Option;
 const props = {
     name: 'file',
     showUploadList: false,
     action: '/upload.do',
-  };      
-function onChange(checkedValues) {
-    console.log('checked = ', checkedValues);
-}
+  };    
+const DatePicker = require('antd/lib/date-picker');
 class AddPatient extends Component {
     constructor(props){
         super(props);
         this.state={
-
+            diseaseList:[],
+            diseaseArrCheck:[],
+            sex:0,
+            communityList:[],
+            community:0,//社区id
+            birthday:'',
+            saving:false,
+            patientInfo:{},
+            id:'',
         }
     }
+    componentDidMount(){
+        const {type,id} = this.props.location.state;
+        this.setState({
+            type,
+            id
+        })
+        if(id){
+            //患者详情
+            const {communityList} = this.state
+            getAxios('/api/v1/patient/'+id,'get',{},(res)=>{
+                console.log(res);
+                const patientInfo = res.data;
+                let diseaseArrCheck = []
+                patientInfo.disease&&patientInfo.disease.map((item)=>{
+                    console.log(item)
+                    diseaseArrCheck.push(item.id)
+                })
+                console.log(diseaseArrCheck)
+                this.setState({
+                    patientInfo:res.data,
+                    community:patientInfo.community&&patientInfo.community.id,
+                    diseaseArrCheck:diseaseArrCheck
+                })
+                console.log(communityList)
+                
+            })
+           
+        }
+         //获取疾病分组
+         getAxios('/api/v1/disease','get',{},(res)=>{
+            res.data.map((item)=>{
+                item.label = item.disease_name;
+                item.value = item.id;
+            })
+            this.setState({
+                diseaseList:res.data
+            })
+        })
+          //获取社区分组
+          getAxios('/api/v1/community','get',{},(res)=>{
+            this.setState({
+                communityList:res.data
+            })
+        })
+       
+    }
+    //选择病症分组
+    onChangeDisease(e){
+        console.log(e);
+        this.setState({
+            diseaseArrCheck:e
+        })
+    }
+    //选择社区
+    handleChange(e){
+        console.log(e)
+        this.setState({
+            community:e
+        })
+    }
+    //选择生日
+    onChangeBirthday(e){
+        let  d = new Date(e);
+        let year = d.getFullYear();
+        let month = d.getMonth() + 1 > 9 ? (d.getMonth() + 1) : '0'+ (d.getMonth() + 1)
+        let day = d.getDate() > 9 ? d.getDate() : '0' + d.getDate();
+        this.setState({
+            birthday:year+ '-' + month + '-' + day
+        })
+    }
+    //添加患者
+    addPatient(){
+        let name = document.getElementById('name').value;
+        // let age = document.getElementById('age').value;
+        let phone = document.getElementById('phone').value;
+        let cardNum = document.getElementById('cardNum').value;//证件号码
+        let community =  this.state.community;//社区id
+        let diseaseArrCheck = this.state.diseaseArrCheck;//病症分组
+        let sex = this.state.sex;
+        let birthday = this.state.birthday;
+        if(!name){
+            message.error('请输入患者姓名')
+        }else if(!cardNum||cardNum.length<18){
+            message.error('请输入至少18位的身份证号码')
+        }else if(!community){
+            message.error('请选择社区')
+        }else if(!birthday){
+            message.error('请选择生日')
+        }else if(!phone||!(/^1[3|4|5|8][0-9]\d{8}$/.test(phone))){
+            message.error('请填写正确的手机号码')
+        }else if(diseaseArrCheck.length==0){
+            message.error('请选择病症分组')
+        }else{
+            this.setState({
+                saving:true
+            })
+            let data = {
+                name:name,
+                gender:sex,
+                phone:phone,
+                idcard_number:cardNum,
+                community_id:community,
+                birthday:birthday,
+                disease_ids:diseaseArrCheck
+            }
+            // console.log(data);
+            getAxios('/api/v1/patient','post',data,(res)=>{
+                console.log(res)
+                this.setState({
+                    saving:false
+                })
+                message.success('添加成功')
+            },()=>{
+                this.setState({
+                    saving:false
+                })
+                message.success('添加失败')
+            })
+        }
+        
+    }
     render(){
+        const {type,patientInfo,name} = this.state
         return(
             <div>
                 <div className='navTop'></div>
                 <div className='nav'>                
-                    <span className='med_seven_five_grey'>患者管理 > 添加患者</span>
+                    <span className='med_seven_five_grey'>患者管理 > {type == 'add'?'添加患者':'编辑患者'}</span>
                 </div>               
                 <div className='addPatientContain'>
                      {/* 头部操作 */}
                     <div className='containHandle clearfix'>
-                        <span className='regu_seven_four_grey leftTitle'>录入新患者信息</span>
+                        <span className='regu_seven_four_grey leftTitle'>{type == 'add'?'录入新患者信息':'编辑患者信息'}</span>
                         <div className='floatRight btnContain'>
                             <div className='cancelBtn floatLeft med_seven_five_grey'>取消</div>
-                            <div className='confirmBtn floatLeft med_seven_five_white'>确认</div>
+                            <div className='confirmBtn floatLeft med_seven_five_white' onClick={()=>{
+                                this.state.saving == false?this.addPatient():null}}>{this.state.saving==false?'保存':'保存中'}</div>
                         </div>
                     </div>
                     {/* 基本信息 */}
@@ -55,54 +183,106 @@ class AddPatient extends Component {
                                 <div className='basicInfoItem'>
                                     <div className='med_sixHalf_five_Black infoLable'>患者姓名:</div>
                                     <div>
-                                        <input placeholder='填写患者姓名' className='regu_sixHalf_four_grey nameInfo'></input>
+                                        {
+                                            type == 'add'?
+                                            <input placeholder='填写患者姓名' className='regu_sixHalf_four_grey nameInfo' id='name'/>:
+                                            <input placeholder='填写患者姓名' className='regu_sixHalf_four_grey nameInfo' id='name'
+                                             value={patientInfo.name} 
+                                             onChange={(e)=> {
+                                                patientInfo.name = e.target.value;
+                                                this.setState({
+                                                     patientInfo
+                                                })
+                                            }}/>
+                                        }
                                     </div>
                                 </div>
                                 <div className='basicInfoItem clearfix'>
                                     <div className='floatLeft'>
                                         <div className='med_sixHalf_five_Black floatLeft infoLable'>选择性别：</div>
                                         <div className='magrRight'>
-                                            <Radio.Group defaultValue="a" buttonStyle="solid" >
-                                                <Radio.Button value="a">今日</Radio.Button>
-                                                <Radio.Button value="b">本周</Radio.Button>
-                                                <Radio.Button value="c">本月</Radio.Button>
+                                            <Radio.Group defaultValue="0" buttonStyle="solid" onChange={(e)=>this.setState({
+                                                sex:e.target.value
+                                            })}>
+                                                <Radio.Button value="2">其他</Radio.Button>
+                                                <Radio.Button value="1">男</Radio.Button>
+                                                <Radio.Button value="0">女</Radio.Button>                                              
                                             </Radio.Group>
                                         </div>
                                     </div>
                                     <div className='floatLeft'> 
                                         <div className='med_sixHalf_five_Black floatLeft infoLable'>证件号码</div>
                                         <div>
-                                            <input placeholder='填写患者证件号码' className='cardInfo regu_sixHalf_four_grey'></input>
+                                        {
+                                            type == 'add'?
+                                            <input placeholder='填写患者证件号码' className='cardInfo regu_sixHalf_four_grey' id='cardNum'/>:
+                                            <input placeholder='填写患者证件号码' 
+                                            className='cardInfo regu_sixHalf_four_grey'
+                                            id='cardNum' 
+                                            value={patientInfo.idcard_number} 
+                                            onChange={(e)=> {
+                                               patientInfo.idcard_number = e.target.value;
+                                               this.setState({
+                                                    patientInfo
+                                               })
+                                           }}/>
+                                        }
                                         </div>
                                     </div>
                                     
                                 </div>
                                 <div className='basicInfoItem clearfix'>
                                     <div className='floatLeft'>
-                                        <div className='med_sixHalf_five_Black infoLable'>年龄：</div>
+                                        <div className='med_sixHalf_five_Black infoLable'>联系方式：</div>
                                         <div className='magrRight'>
-                                            <input placeholder='填写患者年龄' className='regu_sixHalf_four_grey ageInfo'></input>
+                                            {
+                                                type == 'add'?
+                                                <input placeholder='填写患者联系方式' className='regu_sixHalf_four_grey ageInfo' id='phone'/>:
+                                                <input placeholder='填写患者联系方式' className='regu_sixHalf_four_grey ageInfo' id='phone'
+                                                value={patientInfo.phone} 
+                                                onChange={(e)=> {
+                                                    patientInfo.phone = e.target.value;
+                                                    this.setState({
+                                                         patientInfo
+                                                    })
+                                                }}/>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className='floatLeft'>
+                                        <div className='med_sixHalf_five_Black infoLable'>生日：</div>
+                                        <div className='magrRight'>
+                                            <DatePicker onChange={(e)=>this.onChangeBirthday(e)} />
                                         </div>
                                     </div>
                                     <div className='floatLeft'>
                                         <div className='med_sixHalf_five_Black infoLable'>社区</div>
                                         <div className='magrRight'>
-                                            <input placeholder='填写患者所在社区' className='regu_sixHalf_four_grey socityInfo'></input>
+                                            {/*<input placeholder='填写患者所在社区' className='regu_sixHalf_four_grey socityInfo' id='community'></input>*/}
+                                                <Select showSearch
+                                                    style={{ width: 200 }}
+                                                    placeholder="请选择社区"
+                                                    optionFilterProp="children"
+                                                    notFoundContent="无法找到"
+                                                    value={this.state.community-0}
+                                                    onChange={(e)=>this.handleChange(e)}
+                                                >
+                                                {
+                                                    this.state.communityList.map((item)=>{
+                                                        return( <Option value={item.id} key={item.id}>{item.community_name}</Option>)
+                                                    })
+                                                }
+                                                </Select>
                                         </div>
                                     </div>
-                                    <div className='floatLeft'>
-                                        <div className='med_sixHalf_five_Black infoLable'>联系方式：</div>
-                                        <div>
-                                            <input placeholder='填写患者联系方式' className='regu_sixHalf_four_grey ageInfo'></input>
-                                        </div>
-                                    </div>
+                                   
                                    
                                 </div>
                                 <div className='basicInfoItem clearfix'>
                                     <div>
                                         <div className='med_sixHalf_five_Black infoLable' style={{marginBottom:'1rem'}}>病症分组：</div>
                                         <div>
-                                            <CheckboxGroup options={options} defaultValue={['Pear']} onChange={onChange} /> 
+                                            <CheckboxGroup options={this.state.diseaseList} onChange={(e)=>this.onChangeDisease(e)} value={this.state.diseaseArrCheck}/> 
                                         </div>
                                     </div>
                                 </div>

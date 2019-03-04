@@ -8,7 +8,8 @@ const Pagination = require('antd/lib/pagination');
 const Radio = require('antd/lib/radio');
 const DatePicker = require('antd/lib/date-picker');
 const RangePicker = DatePicker.RangePicker;
-
+const getAxios = require('../../utils/axiosInstance');
+const Enum = require('../../utils/enum');
 const echarts = require('echarts');
 require('echarts/chart/line');
 const option = {
@@ -113,6 +114,7 @@ class PatientDetail extends Component {
             showCover:false,
             key:1,
             bloodStatus:1,//异常类别状态 1 全部状态 2 未处理
+            patientInfo:{},
         }
     }
     changeTab(key){
@@ -120,11 +122,21 @@ class PatientDetail extends Component {
         this.setState({key:key})
     }
     componentDidMount(){
+        //患者详情
+        let id = this.props.location.state.id;
+        getAxios('/api/v1/patient/'+id,'get',{},(res)=>{
+            console.log(res);
+            this.setState({
+                patientInfo:res.data
+            })
+        })
+
         let echartBlood =echarts.init(document.getElementById('echartBlood'));
         echartBlood.setOption(option);
     }
     
     render(){
+        const patientInfo = this.state.patientInfo;
         return(
             <div className='patientDetail'>        
                 <div className='navTop'></div>           
@@ -158,36 +170,40 @@ class PatientDetail extends Component {
                                 <div className='pd_userInfoItem clearfix'>
                                     <div className='pd_userInfoItemColumn floatLeft'>
                                         <span className='blod_sixHalf_five_black'>患者姓名: </span>
-                                        <span className='med_sixHalf_five_Black'>徐达</span>
+                                        <span className='med_sixHalf_five_Black'>{patientInfo.name}</span>
                                     </div>
                                     <div className='pd_userInfoItemColumnSec floatLeft'>
                                         <span className='blod_sixHalf_five_black'>性别: </span>
-                                        <span className='med_sixHalf_five_Black'>男</span>
+                                        <span className='med_sixHalf_five_Black'>{Enum.getSex(patientInfo.gender)}</span>
                                     </div>
                                     <div className='floatLeft'>
                                         <span className='blod_sixHalf_five_black'>年龄: </span>
-                                        <span className='med_sixHalf_five_Black'>19</span>
+                                        <span className='med_sixHalf_five_Black'>{patientInfo.age}</span>
                                     </div>                                    
                                 </div>
                                 <div className='pd_userInfoItem clearfix'>
                                     <div className='pd_userInfoItemColumn floatLeft'>
                                         <span className='blod_sixHalf_five_black'>证件号码: </span>
-                                        <span className='med_sixHalf_five_Black'>254264115488454475</span>
+                                        <span className='med_sixHalf_five_Black'>{patientInfo.idcard_number}</span>
                                     </div>
                                     <div className='pd_userInfoItemColumnSec floatLeft'>
                                         <span className='blod_sixHalf_five_black'>社区: </span>
-                                        <span className='med_sixHalf_five_Black'>天河东路的日子</span>
+                                        <span className='med_sixHalf_five_Black'>{patientInfo.community&&patientInfo.community.name}</span>
                                     </div>
                                     <div className='floatLeft'>
                                         <span className='blod_sixHalf_five_black'>联系方式: </span>
-                                        <span className='med_sixHalf_five_Black'>15932151478</span>
+                                        <span className='med_sixHalf_five_Black'>{patientInfo.phone}</span>
                                     </div>                                    
                                 </div>
                                 <div className='pd_userInfoItem'>
                                     <span className='blod_sixHalf_five_black'>病症分组: </span>
-                                    <span className='med_sixHalf_five_Black pd_diseaseType'>高血压</span>                                              
-                                    <span className='med_sixHalf_five_Black pd_diseaseType'>糖尿病</span>                                              
-                                    <span className='med_sixHalf_five_Black pd_diseaseType'>心脏病</span>                                              
+                                    {
+                                        patientInfo.disease&&patientInfo.disease.map((item,index)=>{
+                                            return(
+                                                <span className='med_sixHalf_five_Black pd_diseaseType' key={index}>{item.name}</span>  
+                                            )
+                                        })
+                                    }                                                                     
                                 </div>
                             </div>
                             <div>
@@ -206,7 +222,7 @@ class PatientDetail extends Component {
                                     <div className='pd_dashDiv'></div>
                                     <div className='pd_exceptionTitle regu_seven_four_Black'>异常统计信息</div>
                                     <div className='pd_timeChoose'>
-                                        <Radio.Group defaultValue="1" buttonStyle="solid" onChange={(e)=>this.changeNoticeType(e)}>
+                                        <Radio.Group defaultValue="1" buttonStyle="solid" onChange={(e)=>{}}>
                                             <Radio.Button value="1">全部</Radio.Button>
                                             <Radio.Button value="2">本周</Radio.Button>
                                             <Radio.Button value="3">本月</Radio.Button>

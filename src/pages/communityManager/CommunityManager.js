@@ -8,7 +8,7 @@ const getAxios = require('../../utils/axiosInstance');
 let selectedRowsArr = [];
 const rowSelection = {
     onChange(selectedRowKeys, selectedRows) {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows,rowSelection.selectedRowKeys);
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
       selectedRowsArr = selectedRows;
     },
     onSelect(record, selected, selectedRows) {
