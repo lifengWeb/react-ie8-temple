@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 require('../patientManager/addPatient.css');
 require('./addReminder.css');
+const getAxios = require('../../utils/axiosInstance');
 import { Slider ,Select,Table} from 'antd';
 import { DatePicker } from 'antd';
 import { TimePicker } from 'antd';
@@ -27,72 +28,7 @@ function onChange(checkedValues) {
 function log(value) {
     console.log(value);
   }
-  // 通过 rowSelection 对象表明需要行选择
-const rowSelection = {
-    onChange(selectedRowKeys, selectedRows) {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-    onSelect(record, selected, selectedRows) {
-      console.log(record, selected, selectedRows);
-    },
-    onSelectAll(selected, selectedRows, changeRows) {
-      console.log(selected, selectedRows, changeRows);
-    },
-  };
-  const columns = [{
-    title: '姓名',
-    dataIndex: 'name',
-    render: text => <a href="#">{text}</a>,
-  }, {
-    title: '社区',
-    dataIndex: 'sex',
-  }, {
-    title: '证件号码',
-    dataIndex: 'address',
-  },{
-      title: '年龄',
-      dataIndex: 'age',
-    }, {
-      title: '病症分组',
-      dataIndex: 'age1',
-    }];
-    const columnsCover = [{
-      title: '姓名',
-      dataIndex: 'name',
-    }, {
-      title: '社区',
-      dataIndex: 'address',
-    },{
-        title: '证件号码',
-        dataIndex: 'age',
-      }, {
-        title: '年龄',
-        dataIndex: 'age1',
-      }, {
-        title: '病症分组',
-        dataIndex: 'age2',
-      }];
-  const data = [{
-    key: '1',
-    name: '胡彦斌',
-    sex:'男',
-    age: 32,
-    age1: 32,
-    age2: 32,
-    age3: 32,
-    age4: 32,
-    address: '西湖区湖底公园1号',
-  }, {
-    key: '2',
-    name: '胡彦祖',
-    age: 42,
-    address: '西湖区湖底公园1号',
-  }, {
-    key: '3',
-    name: '李大嘴',
-    age: 32,
-    address: '西湖区湖底公园1号',
-  }];
+
 class AddReminder extends Component {
     constructor(props){
         super(props);
@@ -101,10 +37,68 @@ class AddReminder extends Component {
             value: 1,//默认还是自定义
             exceptionType:1,//哪种触发类型
             showCover:true,
+            diseaseList:[],
+            diseaseType:'',
+            communityList:[],
+            communityType:'',
+            patientList:[],
+            selectedRowKeys:[],
         }
     }
+    componentDidMount(){
+          //获取疾病分组
+          getAxios('/api/v1/disease','get',{},(res)=>{
+            res.data.map((item)=>{
+                item.isSelect = false 
+            })
+            this.setState({
+                diseaseList:res.data
+            })
+        })
+        //获取社区分组
+        getAxios('/api/v1/community','get',{},(res)=>{
+            this.setState({
+                communityList:res.data
+            })
+        })
+
+        this.getPatientList();
+    }
+     //获取患者列表
+     getPatientList(){
+        let url = '';
+        let {diseaseType,communityType,exceptionType,gender} = this.state;
+        if(diseaseType){
+            url = 'disease_id=' + diseaseType;
+        }
+        if(communityType){
+            url?
+                url += '&community_id=' + communityType:
+                url = 'community_id=' + communityType            
+        }
+         getAxios(url?'/api/v1/patient?'+url:'/api/v1/patient','get',{},(res)=>{
+            this.setState({
+                patientList:res.data
+            })
+        })
+    }
+    //筛选患者列表时 选择病症分组
+    handleChangeDisease(e){
+        this.setState({
+            diseaseType:e
+        },()=>{
+            this.getPatientList()
+        })        
+    }
+    //筛选患者列表时 选择社区分组
+    handleChangeCommunity(e){
+        this.setState({
+            communityType:e
+        },()=>{
+            this.getPatientList()
+        })
+    }
     changeNoticeType(e){
-        console.log(e);
         this.setState({
             noticeType:e.target.value
         })
@@ -115,19 +109,64 @@ class AddReminder extends Component {
         })
     }
     onChange(e) {
-        console.log('radio checked', e.target.value);
         this.setState({
           value: e.target.value,
         });
       }
+    hideCanceChoose(){
+        this.setState({
+            showCover:false
+        })
+    }
     
     render(){
-        const {exceptionType,value} = this.state;        
+        const that = this;
+        const {exceptionType,value,patientList,selectedRowKeys} = this.state; 
         const showBloodCustom = (exceptionType == 2 && value == 2)? true :false;//显示自定义血压
         const showBlooddefault = (exceptionType == 2 && value == 2)? true :false;//显示默认血压
         const showdefaultHeart = (exceptionType == 1 && value == 1)? true :false;//显示默认心率
         const showCustomtHeart =  (exceptionType == 1 && value == 2)? true :false;//显示自定义心率
         const exceptionTypeStr = exceptionType==1?'心率':(exceptionType==2?'血压':'温度');
+        //选择患者弹窗列表 数据配置       
+        const rowSelection = {
+            onChange(selectedRowKeys, selectedRows) {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+                that.setState({
+                    selectedRowKeys,
+                    selectedRows
+                })
+            },
+            selectedRowKeys:that.state.selectedRowKeys
+        };
+        const columns = [{
+            title: '姓名',
+            dataIndex: 'name',
+            width: 150,
+            render: text => <a>{text}</a>,
+          }, {
+            title: '社区',
+            width: 150,
+            dataIndex: 'community',
+            render:  community => <span>{community&&community.name}</span>,
+          }, {
+              title: '证件号码',
+              dataIndex: 'idcard_number',
+              width: 150,
+            },{
+                title: '年龄',
+                width: 50,
+                dataIndex: 'age',
+            },{
+              title: '分组',
+              dataIndex: 'disease',
+              width: 150,
+              render:  disease => <span>{disease&&disease.map((item)=>{
+                  return(
+                      <span key={item.id}>{item.name+ ' '}</span>
+                  )
+              })}</span>,
+            }];
+
         return(
             <div>
                 <div className='navTop'></div>
@@ -249,7 +288,7 @@ class AddReminder extends Component {
                                     e.stopPropagation()
                                 }}>
                                     <div className='coverTitle'>                                    
-                                        <span className='bold_elev_bold_grey '>选择患者 已选<span>3</span>人</span>
+                                        <span className='bold_elev_bold_grey '>选择患者 已选<span>{selectedRowKeys.length}</span>人</span>
                                         <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
                                     </div>
                                     <div className='chooseDayItem clearfix ar_coverHeader'>                                   
@@ -260,11 +299,14 @@ class AddReminder extends Component {
                                         placeholder="请选择社区"
                                         optionFilterProp="children"
                                         notFoundContent="无法找到"
-                                        onChange={()=>this.handleChange}
+                                        onChange={(e)=>this.handleChangeDisease(e)}
                                     >
-                                        <Option value="jack">杰克</Option>
-                                        <Option value="lucy">露西</Option>
-                                        <Option value="tom">汤姆</Option>
+                                        <Option value='' key='0'>全部分组</Option>
+                                        {
+                                            this.state.diseaseList.map((item)=>{
+                                                return( <Option value={item.id+''} key={item.id}>{item.disease_name}</Option>)
+                                            })
+                                        }
                                     </Select>
                                     </div>   
                                         <span className='med_six_five_grey floatLeft'>选择社区:</span>                       
@@ -274,16 +316,16 @@ class AddReminder extends Component {
                                             placeholder="请选择社区"
                                             optionFilterProp="children"
                                             notFoundContent="无法找到"
-                                            onChange={()=>this.handleChange}
+                                            onChange={(e)=>this.handleChangeCommunity(e)}
                                         >
-                                            <Option value="jack">杰克</Option>
-                                            <Option value="lucy">露西</Option>
-                                            <Option value="tom">汤姆</Option>
+                                            <Option value='' key='0'>全部社区</Option>
+                                            {
+                                                this.state.communityList.map((item)=>{
+                                                    return( <Option value={item.id+''} key={item.id}>{item.community_name}</Option>)
+                                                })
+                                            }
                                         </Select>
-                                        </div>   
-                                        <span>
-                                            <input />
-                                        </span>
+                                        </div>  
                                         <div className='ar_freshDiv clearfix'>
                                             <div className='refreshBtn floatRight'>
                                                 <img src={require('../../asset/img/refresh.png')} className='refreshIcon'></img>
@@ -291,10 +333,13 @@ class AddReminder extends Component {
                                             </div>
                                         </div>                                        
                                     </div>
-                                    <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={false}/>  
+                                    <Table rowSelection={rowSelection} columns={columns} dataSource={patientList} pagination={false} useFixedHeader={true} 
+                                    onChange={(e)=>{
+                                        console.log(e)                                                  
+                                    }}/>  
                                     <div className='groupHandleBtm'>
                                         <div className='floatRight'>
-                                                <div className='cancelBtn med_eight_five_grey floatLeft'>取消</div>
+                                                <div className='cancelBtn med_eight_five_grey floatLeft' onClick={()=>this.hideCanceChoose()}>取消</div>
                                                 <div className='confirmBtn med_eight_five_white floatRight'>完成</div>
                                         </div>
                                     </div>
@@ -309,4 +354,5 @@ class AddReminder extends Component {
         )
     }
 }
+
 module.exports = AddReminder;

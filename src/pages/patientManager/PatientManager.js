@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 require('./patientManager.css');
 const message = require('antd/lib/message');
 const getAxios = require('../../utils/axiosInstance');
+const Enum = require('../../utils/enum');
 
 
 const Breadcrumb = require('antd/lib/breadcrumb');
@@ -50,7 +51,11 @@ class PatientManager extends Component{
             patientList:[],
             pageNow:1,
             diseaseList:[],
-            communityList:[]
+            communityList:[],
+            diseaseType:'',
+            communityType:'',
+            exceptionType:'',
+            gender:'',
         }
     }
     componentDidMount(){
@@ -73,13 +78,66 @@ class PatientManager extends Component{
     }
     //获取患者列表
     getPatientList(){
-         getAxios('/api/v1/patient','get',{},(res)=>{
+        let url = '';
+        let {diseaseType,communityType,exceptionType,gender} = this.state;
+        if(diseaseType){
+            url = 'disease_id=' + diseaseType;
+        }
+        if(communityType){
+            url?
+                url += '&community_id=' + communityType:
+                url = 'community_id=' + communityType            
+        }
+        if(exceptionType){
+            url?
+                url += '&'+exceptionType + '=1':
+                url += exceptionType + '=1'
+        }
+        if(gender){
+            url?
+            url += '&gender='+gender:
+            url += 'gender='+gender
+        }
+         getAxios(url?'/api/v1/patient?'+url:'/api/v1/patient','get',{},(res)=>{
             this.setState({
                 patientList:res.data
             })
         })
     }
-    //选择病症分组
+    //筛选患者列表时 选择病症分组
+    handleChangeDisease(e){
+        this.setState({
+            diseaseType:e
+        },()=>{
+            this.getPatientList()
+        })        
+    }
+    //筛选患者列表时 选择社区分组
+    handleChangeCommunity(e){
+        this.setState({
+            communityType:e
+        },()=>{
+            this.getPatientList()
+        })
+    }
+    //筛选患者列表时 选择异常
+    handleChangeException(e){
+        this.setState({
+            exceptionType:e
+        },()=>{
+            this.getPatientList()
+        })
+    }
+    //筛选患者列表时 选择性别
+    handleChangeGender(e){
+        this.setState({
+            gender:e.target.value
+        },()=>{
+            this.getPatientList()
+        })
+    }
+
+    //复制分组时 选择病症分组
     chooseDiseasegroup(id){
         const diseaseList = this.state.diseaseList;
         diseaseList.map((item)=>{
@@ -118,16 +176,18 @@ class PatientManager extends Component{
         const columns = [{
             title: '姓名',
             dataIndex: 'name',
-            width: 50,
+            width: 150,
             render: text => <a>{text}</a>,
           }, {
             title: '性别',
             width: 50,
             dataIndex: 'gender',
+            render:  gender => <span>{Enum.getSex(gender)}</span>,
           }, {
             title: '社区',
             width: 150,
-            dataIndex: 'community_name',
+            dataIndex: 'community',
+            render:  community => <span>{community&&community.name}</span>,
           },{
               title: '年龄',
               width: 50,
@@ -142,8 +202,13 @@ class PatientManager extends Component{
               width: 150,
             },{
               title: '分组',
-              dataIndex: 'disease_name',
+              dataIndex: 'disease',
               width: 150,
+              render:  disease => <span>{disease&&disease.map((item)=>{
+                  return(
+                      <span key={item.id}>{item.name+ ' '}</span>
+                  )
+              })}</span>,
             }, {
               title: '当前警报状态',
               dataIndex: 'age4',
@@ -151,7 +216,7 @@ class PatientManager extends Component{
             }, {
               title: '已设置提醒',
               dataIndex: 'age5',
-              width: 150,
+              width:100,
               render: (text,record) => {
                   const {showItem} = this.state;
                 return(
@@ -236,11 +301,12 @@ class PatientManager extends Component{
                                 placeholder="全部分组"
                                 optionFilterProp="children"
                                 notFoundContent="无法找到"
-                                onChange={()=>this.handleChange}
+                                onChange={(e)=>this.handleChangeDisease(e)}
                             >
+                            <Option value='' key='0'>全部分组</Option>
                             {
                                 this.state.diseaseList.map((item)=>{
-                                    return( <Option value={item.id} key={item.id}>{item.disease_name}</Option>)
+                                    return( <Option value={item.id+''} key={item.id}>{item.disease_name}</Option>)
                                 })
                             }
                             </Select>
@@ -248,10 +314,12 @@ class PatientManager extends Component{
                         <div className='floatLeft'>
                             <span className='med_six_five_grey floatLeft'>选择性别:</span>
                             <div className='floatLeft dayRadio'>
-                                <Radio.Group defaultValue="a" buttonStyle="solid" >
-                                    <Radio.Button value="a">全部</Radio.Button>
-                                    <Radio.Button value="b">男</Radio.Button>
-                                    <Radio.Button value="c">女</Radio.Button>
+                                <Radio.Group defaultValue="" buttonStyle="solid" onChange={(e)=>{
+                                    this.handleChangeGender(e)
+                                }}>
+                                    <Radio.Button value="">全部</Radio.Button>
+                                    <Radio.Button value="1">男</Radio.Button>
+                                    <Radio.Button value="0">女</Radio.Button>
                                 </Radio.Group>
                             </div>
                         </div>
@@ -264,11 +332,12 @@ class PatientManager extends Component{
                             placeholder="请选择社区"
                             optionFilterProp="children"
                             notFoundContent="无法找到"
-                            onChange={()=>this.handleChange}
+                            onChange={(e)=>this.handleChangeCommunity(e)}
                         >
+                        <Option value='' key='0'>全部社区</Option>
                         {
                             this.state.communityList.map((item)=>{
-                                return( <Option value={item.id} key={item.id}>{item.community_name}</Option>)
+                                return( <Option value={item.id+''} key={item.id}>{item.community_name}</Option>)
                             })
                         }
                         </Select>
@@ -281,11 +350,12 @@ class PatientManager extends Component{
                                 placeholder="全部"
                                 optionFilterProp="children"
                                 notFoundContent="无法找到"
-                                onChange={()=>this.handleChange}
+                                onChange={(e)=>this.handleChangeException(e)}
                             >
-                                <Option value="jack">杰克</Option>
-                                <Option value="lucy">露西</Option>
-                                <Option value="tom">汤姆</Option>
+                                <Option value='' key='0'>全部异常</Option>
+                                <Option value="temperature_abnormal">温度异常</Option>
+                                <Option value="blood_pressure_abnormal">血压异常</Option>
+                                <Option value="heart_rate_abnormal">心率异常</Option>
                             </Select>
                         </div>   
                         </div>              

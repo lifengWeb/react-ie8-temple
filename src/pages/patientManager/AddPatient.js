@@ -25,7 +25,7 @@ class AddPatient extends Component {
             diseaseArrCheck:[],
             sex:0,
             communityList:[],
-            community:0,//社区id
+            community:'',//社区id
             birthday:'',
             saving:false,
             patientInfo:{},
@@ -53,7 +53,8 @@ class AddPatient extends Component {
                 this.setState({
                     patientInfo:res.data,
                     community:patientInfo.community&&patientInfo.community.id,
-                    diseaseArrCheck:diseaseArrCheck
+                    diseaseArrCheck:diseaseArrCheck,
+                    birthday:patientInfo.birthday
                 })
                 console.log(communityList)
                 
@@ -137,19 +138,34 @@ class AddPatient extends Component {
                 birthday:birthday,
                 disease_ids:diseaseArrCheck
             }
-            // console.log(data);
-            getAxios('/api/v1/patient','post',data,(res)=>{
-                console.log(res)
-                this.setState({
-                    saving:false
+            console.log(data);
+            if(this.state.type == 'add'){
+                getAxios('/api/v1/patient','post',data,(res)=>{
+                    console.log(res)
+                    this.setState({
+                        saving:false
+                    })
+                    message.success('添加成功')
+                },()=>{
+                    this.setState({
+                        saving:false
+                    })
+                    message.success('添加失败')
                 })
-                message.success('添加成功')
-            },()=>{
-                this.setState({
-                    saving:false
+            }else{
+                const id = this.state.id
+                getAxios('/api/v1/patient/'+id,'patch',data,(res)=>{
+                    this.setState({
+                        saving:false
+                    })
+                    message.success('编辑成功')
+                },()=>{
+                    this.setState({
+                        saving:false
+                    })
+                    message.success('编辑失败')
                 })
-                message.success('添加失败')
-            })
+            }
         }
         
     }
@@ -252,7 +268,7 @@ class AddPatient extends Component {
                                     <div className='floatLeft'>
                                         <div className='med_sixHalf_five_Black infoLable'>生日：</div>
                                         <div className='magrRight'>
-                                            <DatePicker onChange={(e)=>this.onChangeBirthday(e)} />
+                                            <DatePicker onChange={(e)=>this.onChangeBirthday(e)} value={this.state.birthday}/>
                                         </div>
                                     </div>
                                     <div className='floatLeft'>

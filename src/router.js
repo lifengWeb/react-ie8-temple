@@ -38,7 +38,7 @@ const style={
     height:'47rem',
     // height:'100%',
     padding:'1rem 2rem 2rem 0',
-    overflow:'scroll',
+    overflowY:'scroll',
     boxSizing:'border-box'
   }
 }

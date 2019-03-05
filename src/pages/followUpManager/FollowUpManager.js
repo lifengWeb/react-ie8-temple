@@ -1,6 +1,7 @@
 //随访管理
 import React ,{Component} from 'react';
 import { browserHistory } from 'react-router';
+const getAxios = require('../../utils/axiosInstance');
 const Breadcrumb = require('antd/lib/breadcrumb');
 const Radio = require('antd/lib/radio');
 
@@ -114,7 +115,12 @@ class FollowUpManager extends Component{
     onChange(value, dateString){
         console.log(value, dateString);
     }
-    c
+    componentDidMount(){
+      getAxios('/api/v1/followup','get',{},(res)=>{
+        console.log(res)
+      })
+    }
+    
     render(){
         const columns = [{
             title: '编号',
@@ -396,9 +402,6 @@ class FollowUpManager extends Component{
                 </div>
             </div>
         )
-    }
-    componentDidMount(){
-      
     }
 }
 module.exports = FollowUpManager;
