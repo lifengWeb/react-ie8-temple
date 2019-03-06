@@ -2,24 +2,31 @@
 import React, { Component } from 'react';
 require('./reminderManager.css');
 const DatePicker = require('antd/lib/date-picker');
-function onChange(value,dateString){
-    console.log(value,dateString)
+const getAxios = require('../../utils/axiosInstance');
+function onChange(value, dateString) {
+    console.log(value, dateString)
 }
 class ReminderManager extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            showCover:false
+        this.state = {
+            showCover: false
         }
     }
-    
-    render(){
-        return(
-            <div>                
+    componentDidMount() {
+        //获取提醒列表
+        getAxios('/api/v1/rule', 'get', {}, (res) => {
+            console.log(res);
+        })
+    }
+
+    render() {
+        return (
+            <div>
                 <div className='navTop'></div>
-                <div className='nav'>                
+                <div className='nav'>
                     <span className='med_seven_five_grey'>提醒管理</span>
-                    <span className='floatRight' onClick={()=>this.props.history.push('/reminderManager/usingReminder')}>运行中的提醒规则 >> </span>
+                    <span className='floatRight' onClick={() => this.props.history.push('/reminderManager/usingReminder')}>运行中的提醒规则 >> </span>
                 </div>
                 <div className='rm_Contain'>
                     <div className='rm_chooseTme'>
@@ -28,19 +35,19 @@ class ReminderManager extends Component {
                     </div>
                     {/* 列表上面操作部分 */}
                     <div className='handleContain clearfix'>
-                        <div className='regu_seven_four_grey groupHandle floatLeft' onClick={()=>this.setState({
-                            showCover:true
-                        })}>                            
+                        <div className='regu_seven_four_grey groupHandle floatLeft' onClick={() => this.setState({
+                            showCover: true
+                        })}>
                             <span>全部展开</span>
-                            <span className="ant-divider"></span> 
+                            <span className="ant-divider"></span>
                             <span>全部折叠</span>
                         </div>
                         <div className='refreshBtn floatLeft regu_seven_four_grey'>
                             <img src={require('../../asset/img/refresh.png')} className='refreshIcon'></img>
                             刷新
                         </div>
-                        <div className='floatRight'> 
-                            <div className='addBtn floatLeft rm_addBtn' onClick={()=>{
+                        <div className='floatRight'>
+                            <div className='addBtn floatLeft rm_addBtn' onClick={() => {
                                 this.props.history.push('/reminderManager/addReminder')
                             }}>
                                 <span className='med_seven_five_white'>配置新提醒</span>
@@ -49,98 +56,98 @@ class ReminderManager extends Component {
                     </div>
                     {/*提醒列表部分 */}
                     <div className='rm_reminList'>
-                            <div className="rm_reminListTitle borderBottom">
-                                <img src={require('../../asset/img/dropDown.png')} className='rm_dropImg'></img>
-                                <span className='med_seven_five_Black'>2019年1月2日 星期一 提醒列表</span>
-                                <span className='floatRight med_seven_five_grey'>数量 <span> 7984</span></span>
-                            </div>
-                            <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                                <span>时间 <span>10:45</span></span>
-                                <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                                <a onClick={()=>this.setState({
-                                    showCover:true
-                                })}>详情</a>
-                                <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                            </div>
-                            <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                                <span>时间 <span>10:45</span></span>
-                                <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                                <a>详情</a>
-                                <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                            </div>
-                            <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                                <span>时间 <span>10:45</span></span>
-                                <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                                <a>详情</a>
-                                <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                            </div>
-                            <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                                <span>时间 <span>10:45</span></span>
-                                <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                                <a>详情</a>
-                                <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                            </div>
-                            <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                                <span>时间 <span>10:45</span></span>
-                                <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                                <a>详情</a>
-                                <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                            </div>
+                        <div className="rm_reminListTitle borderBottom">
+                            <img src={require('../../asset/img/dropDown.png')} className='rm_dropImg'></img>
+                            <span className='med_seven_five_Black'>2019年1月2日 星期一 提醒列表</span>
+                            <span className='floatRight med_seven_five_grey'>数量 <span> 7984</span></span>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a onClick={() => this.setState({
+                                showCover: true
+                            })}>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
                     </div>
 
                     <div className='rm_reminList'>
-                    <div className="rm_reminListTitle borderBottom">
-                        <img src={require('../../asset/img/dropDown02.png')} className='rm_dropImg'></img>
-                        <span className='med_seven_five_Black'>2019年1月2日 星期一 提醒列表</span>
-                        <span className='floatRight med_seven_five_grey'>数量 <span> 7984</span></span>
+                        <div className="rm_reminListTitle borderBottom">
+                            <img src={require('../../asset/img/dropDown02.png')} className='rm_dropImg'></img>
+                            <span className='med_seven_five_Black'>2019年1月2日 星期一 提醒列表</span>
+                            <span className='floatRight med_seven_five_grey'>数量 <span> 7984</span></span>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
+                        <div className="rm_reminListItem med_seven_five_grey borderBottom">
+                            <span>时间 <span>10:45</span></span>
+                            <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
+                            <a>详情</a>
+                            <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
+                        </div>
                     </div>
-                    <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                        <span>时间 <span>10:45</span></span>
-                        <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                        <a>详情</a>
-                        <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                    </div>
-                    <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                        <span>时间 <span>10:45</span></span>
-                        <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                        <a>详情</a>
-                        <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                    </div>
-                    <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                        <span>时间 <span>10:45</span></span>
-                        <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                        <a>详情</a>
-                        <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                    </div>
-                    <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                        <span>时间 <span>10:45</span></span>
-                        <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                        <a>详情</a>
-                        <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                    </div>
-                    <div className="rm_reminListItem med_seven_five_grey borderBottom">
-                        <span>时间 <span>10:45</span></span>
-                        <span className="med_sixHalf_five_Black">高血压患者异常提醒</span>
-                        <a>详情</a>
-                        <div className='rm_reminPatient'>提醒对象：<span>患者1</span></div>
-                    </div>
-                    </div>                    
                 </div>
                 {/*详情弹窗*/}
                 {
-                    this.state.showCover?
-                    <div className='coverView' onClick={()=>this.setState({
-                        showCover:false
-                    })}>
-                            <div className='groupCover rm_reminDetailCover' onClick={(e)=>{
+                    this.state.showCover ?
+                        <div className='coverView' onClick={() => this.setState({
+                            showCover: false
+                        })}>
+                            <div className='groupCover rm_reminDetailCover' onClick={(e) => {
                                 e.stopPropagation()
                             }}>
-                                <div className='coverTitle'>                                    
+                                <div className='coverTitle'>
                                     <span className='bold_elev_bold_grey '>提醒详情</span>
                                     <img src={require('../../asset/img/delete.png')} className='groupCover_delIcon floatRight'></img>
                                 </div>
-                                <div className='rm_reminDetailContain clearfix'>                                   
-                                    <div className='rm_LeftLabel med_sixHalf_five_grey floatLeft'>                                    
+                                <div className='rm_reminDetailContain clearfix'>
+                                    <div className='rm_LeftLabel med_sixHalf_five_grey floatLeft'>
                                         <div className='marginBtm'>标题</div>
                                         <div className='marginBtm'>发送时间</div>
                                         <div className='marginBtm'>类型</div>
@@ -148,7 +155,7 @@ class ReminderManager extends Component {
                                         <div className='marginBtm'>提醒内容</div>
                                         <div className='marginBtm'>提醒对象</div>
                                     </div>
-                                    <div className='rm_RightLabel med_sixHalf_five_Black floatLeft'>                                    
+                                    <div className='rm_RightLabel med_sixHalf_five_Black floatLeft'>
                                         <div className='marginBtm'>高血压异常提醒</div>
                                         <div className='marginBtm'>2019年01月02日 10:45</div>
                                         <div className='marginBtm'>心率异常提醒</div>
@@ -162,12 +169,12 @@ class ReminderManager extends Component {
                                 </div>
                                 <div className='groupHandleBtm'>
                                     <div className='floatRight'>
-                                            <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
+                                        <div className='confirmBtn med_eight_five_white floatRight'>确认</div>
                                     </div>
                                 </div>
                             </div>
-                        
-                    </div>:''
+
+                        </div> : ''
                 }
             </div>
         )

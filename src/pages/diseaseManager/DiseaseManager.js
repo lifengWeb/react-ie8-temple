@@ -46,7 +46,7 @@ class DiseaseManager extends Component {
       if(!name){
         message.error('请输入分组名称')
       }else{
-        getAxios('/api/v1/disease/'+id,'patch',{name:name},(res)=>{
+        getAxios('/api/v1/disease/'+id,'put',{name:name},(res)=>{
             console.log(res)
             message.success('重命名成功')
             this.getDiseaseList();

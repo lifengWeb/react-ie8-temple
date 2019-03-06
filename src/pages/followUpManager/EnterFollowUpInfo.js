@@ -5,34 +5,34 @@ import React, { Component } from 'react';
 import { DatePicker } from 'antd';
 
 function onChange(value, dateString) {
-  console.log(value, dateString);
+    console.log(value, dateString);
 }
 
 require('./enterFollowUpInfo.css');
 const Radio = require('../../component/antd/Radio');
 
 class EnterFollowUpInfo extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
 
         }
     }
-    
-    render(){
-        return(
-            <div>     
-                <div className='navTop'></div>           
-                <div className='nav'>                
+
+    render() {
+        return (
+            <div>
+                <div className='navTop'></div>
+                <div className='nav'>
                     <span className='med_seven_five_grey'>随访管理 > 添加随访信息</span>
                 </div>
                 <div className='efu_Contain'>
                     <div className='containHandle clearfix'>
-                            <span className='regu_seven_four_grey leftTitle'>录入新患者信息</span>
-                            <div className='floatRight btnContain'>
-                                <div className='cancelBtn floatLeft med_seven_five_grey'>取消</div>
-                                <div className='confirmBtn floatLeft med_seven_five_white'>保存</div>
-                            </div>
+                        <span className='regu_seven_four_grey leftTitle'>录入新患者信息</span>
+                        <div className='floatRight btnContain'>
+                            <div className='cancelBtn floatLeft med_seven_five_grey'>取消</div>
+                            <div className='confirmBtn floatLeft med_seven_five_white'>保存</div>
+                        </div>
                     </div>
                     <div className='pd_followUpDetail floatLeft'>
                         <div className='pd_followUpDetailHeader borderBottom'>
@@ -79,9 +79,9 @@ class EnterFollowUpInfo extends Component {
                                 <div className='pd_rowItem'>
                                     <span>病症分组：</span>
                                     <span>许多</span>
-                                </div>                               
+                                </div>
                             </div>
-                        
+
                         </div>
                         <div className='blod_sixHalf_five_black pd_followUpTableContain'>
                             <div className='blod_sixHalf_five_black'>
@@ -89,7 +89,7 @@ class EnterFollowUpInfo extends Component {
                                 <span> 症状</span>
                             </div>
                             <textarea className='efu_textarea med_sixHalf_five_grey' placeholder='点击填写症状'>
-                                
+
                             </textarea>
                             <div className='blod_sixHalf_five_black'>
                                 <span className='efu_blueMark'></span>
@@ -97,10 +97,10 @@ class EnterFollowUpInfo extends Component {
                             </div>
                             <div>
                                 <div className='efu_inputCotain'>
-                                    <span  className='med_sixHalf_five_Black'> 体重: </span>
+                                    <span className='med_sixHalf_five_Black'> 体重: </span>
                                     <input className="efu_input"></input>
                                     <span className="efu_unitTwo med_sixHalf_five_grey">kg</span>
-                                    <span  className='med_sixHalf_five_Black'> 血压: </span>
+                                    <span className='med_sixHalf_five_Black'> 血压: </span>
                                     <input className="efu_input med_sixHalf_five_grey" placeholder="收缩压"></input>
                                     <span className="efu_unit med_sixHalf_five_grey">mmHg</span>
                                     <span> / </span>
@@ -108,7 +108,7 @@ class EnterFollowUpInfo extends Component {
                                     <span className="efu_unit med_sixHalf_five_grey">mmHg</span>
                                 </div>
                                 <div className='efu_checkBoxCotain'>
-                                    <span  className='med_sixHalf_five_Black'>心里调整：</span>
+                                    <span className='med_sixHalf_five_Black'>心里调整：</span>
                                     <Radio></Radio>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ class EnterFollowUpInfo extends Component {
                                 <DatePicker onChange={onChange} />
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

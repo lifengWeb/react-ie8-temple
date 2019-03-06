@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 require('./followUpDetail.css');
 class FollowUpDetail extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
 
         }
     }
-    
-    render(){
-        return(
-            <div>        
-                <div className='navTop'></div>        
-                <div className='nav'>                
+
+    render() {
+        return (
+            <div>
+                <div className='navTop'></div>
+                <div className='nav'>
                     <span className='med_seven_five_grey'>随访管理 > 查看记录</span>
                 </div>
                 <div className='fud_Contain'>
@@ -61,14 +61,14 @@ class FollowUpDetail extends Component {
                                 <div className='pd_rowItem'>
                                     <span>病症分组：</span>
                                     <span>许多</span>
-                                </div>                               
+                                </div>
                             </div>
-                        
+
                         </div>
-                        <div className='blod_sixHalf_five_black pd_followUpTableContain'>       
+                        <div className='blod_sixHalf_five_black pd_followUpTableContain'>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         )
     }

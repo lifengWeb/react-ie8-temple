@@ -1,5 +1,5 @@
-function getSex(num){
-    switch(num){
+function getSex(num) {
+    switch (num) {
         case 0:
             return '女'
             break;
@@ -13,5 +13,5 @@ function getSex(num){
 
 }
 module.exports = {
-    getSex:getSex
+    getSex: getSex
 }
